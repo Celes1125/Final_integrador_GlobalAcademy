@@ -1,0 +1,59 @@
+https://www.planttext.com/
+
+@startuml
+Class Usuario{
+-long id
+-nombre
+-apellido
+-password
+-fecha_nacimiento
+-tipo_usuario
+-email
+crearUsuario()
+modificarUsuario()
+bajaUsuario()
+}
+Class Vendedor{
+-idVendedor
+-ventas
+
+}
+Class Venta{
+-fechaCreacion
+-entregaEstimada
+-entregaEfectiva
+-detalleVenta
+generarVenta()
+cancelarVEnta()
+}
+Class EnumeraUsuario<<enum>>{
+}
+Class Cliente{
+-idCliente
+-compras
+
+}
+Class Producto{
+-idProducto
+-nombreProducto
+-precio
+-categoria
+-stock
+crearProducto()
+modificarProducto()
+bajaProducto()
+}
+
+Class categoriaDelProducto<<enum>>{
+
+}
+
+Envio--Cliente
+class Vendedor extends Usuario
+class Cliente extends Usuario
+Cliente*--Orden
+Vendedor--Producto
+Producto--Envio
+Vendedor*--Venta
+
+@enduml
