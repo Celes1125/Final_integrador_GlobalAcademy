@@ -1,17 +1,22 @@
-https://www.planttext.com/
+
+Para visualizar el diseño, ingresar a: https://www.planttext.com/ y pegar el siguiente código
+
 
 @startuml
 Class Usuario{
 -long id
--nombre
--apellido
--password
--fecha_nacimiento
--tipo_usuario
--email
+-String nombre
+-String apellido
+-String password
+-String fecha_nacimiento
+-String tipo_usuario
+-String email
 crearUsuario()
 modificarUsuario()
-bajaUsuario()
+eliminarUsuario()
+listarUsuarios()
+verUsuarioXId()
+
 }
 Class Vendedor{
 -idVendedor
