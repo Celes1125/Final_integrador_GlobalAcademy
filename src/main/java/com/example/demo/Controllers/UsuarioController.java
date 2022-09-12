@@ -32,6 +32,18 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.crearUsuario(usuario), HttpStatus.CREATED);
     };
 
+    @PutMapping(
+            value = "/usuarios",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<?> modificarUsuario (
+
+            @RequestBody Usuario usuario
+    ){
+        return new ResponseEntity<>(usuarioService.modificarUsuario(usuario), HttpStatus.OK);
+    };
+
 
     @GetMapping(
             value = "/usuarios",
@@ -52,4 +64,6 @@ public class UsuarioController {
     ) {
         return usuarioService.verUsuarioXId(id);
     }
+
+
 }

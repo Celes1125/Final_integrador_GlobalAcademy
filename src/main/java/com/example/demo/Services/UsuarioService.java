@@ -14,9 +14,10 @@ public class UsuarioService {
     public ArrayList<Usuario> crearUsuario(Usuario usuario) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Usuario> usuarios = cs.getUsuarios();
-        usuarios.add (usuario);
+        usuarios.add(usuario);
         cs.setUsuarios(usuarios);
-        return usuarios;    }
+        return usuarios;
+    }
 
     public ArrayList<Usuario> listarUsuarios() {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
@@ -29,8 +30,21 @@ public class UsuarioService {
         ArrayList<Usuario> usuarios = cs.getUsuarios();
         try {
             return new ResponseEntity<>(usuarios.get(id), HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    public ArrayList<Usuario> modificarUsuario(Usuario usuario) {
+        CategoriasSingleton cs = CategoriasSingleton.getInstance();
+        ArrayList<Usuario> usuarios = cs.getUsuarios();
+        usuarios.stream().filter(usuario.getId()== usuario.getId());
+
+
+        cs.setUsuarios(usuarios);
+        return usuarios;
+
+
+    }
+
 }
