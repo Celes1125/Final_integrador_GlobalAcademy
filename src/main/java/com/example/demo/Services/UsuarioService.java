@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -18,6 +19,14 @@ public class UsuarioService {
         cs.setUsuarios(usuarios);
         return usuarios;
     }
+
+
+    public ArrayList
+
+
+
+
+
 
     public ArrayList<Usuario> listarUsuarios() {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
@@ -35,16 +44,6 @@ public class UsuarioService {
         }
     }
 
-    public ArrayList<Usuario> modificarUsuario(Usuario usuario) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Usuario> usuarios = cs.getUsuarios();
-        usuarios.stream().filter(usuario.getId()== usuario.getId());
 
-
-        cs.setUsuarios(usuarios);
-        return usuarios;
-
-
-    }
 
 }
