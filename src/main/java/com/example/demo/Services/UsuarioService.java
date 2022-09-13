@@ -21,12 +21,6 @@ public class UsuarioService {
     }
 
 
-    public ArrayList
-
-
-
-
-
 
     public ArrayList<Usuario> listarUsuarios() {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
@@ -45,5 +39,21 @@ public class UsuarioService {
     }
 
 
-
+    public void modificarUsuario(int id, Usuario usuario) {
+        CategoriasSingleton cs = CategoriasSingleton.getInstance();
+        ArrayList<Usuario> usuarios = cs.getUsuarios();
+        usuarios.stream()
+                .map(u -> {
+                    if(u.getId()==id){
+                        u.setNombre(usuario.getNombre());
+                        u.setApellido(usuario.getApellido());
+                        u.setPassword(usuario.getPassword());
+                        u.setFecha_nacimiento(usuario.getFecha_nacimiento());
+                        u.setTipo_usuario(usuario.getTipo_usuario());
+                        u.setEmail(usuario.getEmail());
+                    }
+                    return u;
+                })
+                .collect(Collectors.toList());
+    }
 }
