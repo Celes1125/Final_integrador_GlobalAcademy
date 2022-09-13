@@ -21,7 +21,6 @@ public class UsuarioService {
     }
 
 
-
     public ArrayList<Usuario> listarUsuarios() {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Usuario> usuarios = cs.getUsuarios();
@@ -44,7 +43,7 @@ public class UsuarioService {
         ArrayList<Usuario> usuarios = cs.getUsuarios();
         usuarios.stream()
                 .map(u -> {
-                    if(u.getId()==id){
+                    if (u.getId() == id) {
                         u.setNombre(usuario.getNombre());
                         u.setApellido(usuario.getApellido());
                         u.setPassword(usuario.getPassword());
@@ -55,5 +54,15 @@ public class UsuarioService {
                     return u;
                 })
                 .collect(Collectors.toList());
+    }
+
+    public ArrayList<Usuario> eliminarUsuario(int id) {
+        CategoriasSingleton cs = CategoriasSingleton.getInstance();
+        ArrayList<Usuario> usuarios = cs.getUsuarios();
+        usuarios.remove(id);
+        cs.setUsuarios(usuarios);
+        return usuarios;
+
+
     }
 }
