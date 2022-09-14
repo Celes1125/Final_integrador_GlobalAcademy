@@ -35,7 +35,7 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.crearUsuario(usuario), HttpStatus.CREATED);
     }
 
-    ;
+
 
     //CONSULTAR LISTA DE USUARIOS desde /usuarios
     @GetMapping(

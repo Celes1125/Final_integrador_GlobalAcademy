@@ -45,6 +45,8 @@ Class Producto{
 -categoria
 -stock
 crearProducto()
+listarProductos()
+verProductoXId()
 modificarProducto()
 bajaProducto()
 }
