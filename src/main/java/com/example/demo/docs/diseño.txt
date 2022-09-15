@@ -1,0 +1,66 @@
+
+Para visualizar el diseño, ingresar a: https://www.planttext.com/ y pegar el siguiente código
+
+
+@startuml
+Class Usuario{
+-long id
+-String nombre
+-String apellido
+-String password
+-String fecha_nacimiento
+-String tipo_usuario
+-String email
+crearUsuario()
+modificarUsuario()
+eliminarUsuario()
+listarUsuarios()
+verUsuarioXId()
+
+}
+Class Vendedor{
+-idVendedor
+-ventas
+
+}
+Class Venta{
+-fechaCreacion
+-entregaEstimada
+-entregaEfectiva
+-detalleVenta
+generarVenta()
+cancelarVEnta()
+}
+Class EnumeraUsuario<<enum>>{
+}
+Class Cliente{
+-idCliente
+-compras
+
+}
+Class Producto{
+-idProducto
+-nombreProducto
+-precio
+-categoria
+-stock
+crearProducto()
+listarProductos()
+verProductoXId()
+modificarProducto()
+bajaProducto()
+}
+
+Class categoriaDelProducto<<enum>>{
+
+}
+
+Envio--Cliente
+class Vendedor extends Usuario
+class Cliente extends Usuario
+Cliente*--Orden
+Vendedor--Producto
+Producto--Envio
+Vendedor*--Venta
+
+@enduml
