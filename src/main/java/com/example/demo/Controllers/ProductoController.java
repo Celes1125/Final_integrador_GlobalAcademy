@@ -1,15 +1,12 @@
 package com.example.demo.Controllers;
-
 import com.example.demo.Services.ProductoService;
 import com.example.demo.Services.UsuarioService;
 import com.example.demo.models.Producto;
 import com.example.demo.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 
 @RestController
@@ -22,7 +19,7 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    //CREAR PRODUCTOS desde /productos
+    //CREAR PRODUCTO desde /productos
 
     @PostMapping(
             value = "/productos",
@@ -30,10 +27,10 @@ public class ProductoController {
     )
     @ResponseBody
     public ResponseEntity<ArrayList<Producto>> crearProducto(
-            @RequestBody Producto producto
+            @RequestBody Producto nuevoProducto
 
     ) {
-        return new ResponseEntity<>(productoService.crearProducto(producto), HttpStatus.CREATED);
+        return productoService.crearProducto(nuevoProducto);
     }
 
     //CONSULTAR LISTA DE PRODUCTOS desde /productos
@@ -42,7 +39,7 @@ public class ProductoController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ArrayList<Producto> listarProductos() {
+    public ResponseEntity<ArrayList<Producto>> listarProductos() {
         return productoService.listarProductos();
     }
 
@@ -52,8 +49,8 @@ public class ProductoController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<?> verProductoXId(
-            @PathVariable(name = "id") int id
+    public ResponseEntity<Producto> verProductoXId(
+            @PathVariable(name = "id") long id
     ) {
         return productoService.verProductoXId(id);
     }
@@ -61,19 +58,18 @@ public class ProductoController {
     //MODIFICAR UN PRODUCTO desde /productos/{id}
 
     @PutMapping(
-            value = "/productos/{id}",
+            value = "/productos",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public Producto modificarProducto(
-            @PathVariable(name = "id") int id,
-            @RequestBody Producto producto
+    public ResponseEntity<Producto> modificarProducto(
+            @RequestBody Producto nuevoProducto
     ) {
-        productoService.modificarProducto(id, producto);
-        return producto;
+        return productoService.modificarProducto(nuevoProducto);
+
     }
 
-    //BORRAR UN PRODUCTO ESPECÍFICO desde /usuarios/{id}
+    //BORRAR UN PRODUCTO ESPECÍFICO desde /productos/{id}
 
     @DeleteMapping(
             value = "/productos/{id}"
@@ -81,11 +77,10 @@ public class ProductoController {
     )
     @ResponseBody
     public ResponseEntity<ArrayList<Producto>> bajaProducto(
-            @PathVariable(name = "id") int id
+            @PathVariable(name = "id") long id
     ) {
-        return new ResponseEntity<>(productoService.bajaProducto(id), HttpStatus.OK);
+        return productoService.bajaProducto(id);
 
     }
-
-
 }
+

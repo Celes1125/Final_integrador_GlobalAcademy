@@ -1,70 +1,99 @@
-package com.example.demo.Services;
 
+package com.example.demo.Services;
 import com.example.demo.CategoriasSingleton;
 import com.example.demo.models.Producto;
-import com.example.demo.models.Usuario;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Service
 public class ProductoService {
 
-    public ArrayList<Producto> crearProducto(Producto producto) {
+    public ResponseEntity<ArrayList<Producto>> crearProducto(Producto nuevoProducto) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Producto> productos = cs.getProductos();
-        productos.add(producto);
-        cs.setProductos(productos);
-        return productos;
 
+        Producto producto = productos.stream()
+                .filter(u -> Objects.equals(u.getIdProducto(), nuevoProducto.getIdProducto()))
+                .findFirst()
+                .orElse(null);
+
+        if(producto == null){
+            productos.add(nuevoProducto);
+            cs.setProductos(productos);
+            return new ResponseEntity<>(productos, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
-    public ArrayList<Producto> listarProductos() {
+    public ResponseEntity<ArrayList<Producto>> listarProductos() {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Producto> productos = cs.getProductos();
-        return productos;
+        return new ResponseEntity<>(productos, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> verProductoXId(int id) {
+    public ResponseEntity<Producto> verProductoXId(long id) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Producto> productos = cs.getProductos();
-        try {
-            return new ResponseEntity<>(productos.get(id), HttpStatus.OK);
-        } catch (Exception e) {
+        Producto producto = productos.stream()
+                .filter(p -> Objects.equals(p.getIdProducto(), id))
+                .findFirst()
+                .orElse(null);
+
+        if(producto != null){
+            return new ResponseEntity<>(producto, HttpStatus.OK);
+        }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    public void modificarProducto(int id, Producto producto) {
+    public ResponseEntity<Producto> modificarProducto(Producto nuevoProducto) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Producto> productos = cs.getProductos();
-        productos.stream()
-                .map(p -> {
-                    if (p.getIdProducto() == id) {
-                        p.setNombreProducto(producto.getNombreProducto());
-                        p.setPrecio(producto.getPrecio());
-                        p.setCategoria(producto.getCategoria());
-                        p.setStock(producto.getStock());
-                    }
-                    return p;
-                })
-                .collect(Collectors.toList());
-    }
+        Producto producto = productos.stream()
+                .filter(p -> Objects.equals(p.getIdProducto(), nuevoProducto.getIdProducto()))
+                .findFirst()
+                .orElse(null);
 
-    public ArrayList<Producto> bajaProducto(int id) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Producto> productos = cs.getProductos();
-        productos.remove(id);
-        cs.setProductos(productos);
-        return productos;
-
+        if(producto != null){
+            producto.setNombreProducto(nuevoProducto.getNombreProducto());
+            producto.setPrecio(nuevoProducto.getPrecio());
+            producto.setCategoria(nuevoProducto.getCategoria());
+            producto.setStock(nuevoProducto.getStock());
+            return new ResponseEntity<>(nuevoProducto, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
     }
 
+    public ResponseEntity<ArrayList<Producto>> bajaProducto(long id) {
 
+        CategoriasSingleton cs = CategoriasSingleton.getInstance();
+        ArrayList<Producto> productos = cs.getProductos();
+
+        Producto producto = productos.stream()
+                .filter(p -> Objects.equals(p.getIdProducto(), id))
+                .findFirst()
+                .orElse(null);
+
+        if(producto != null){
+            productos.remove(producto);
+            cs.setProductos(productos);
+            return new ResponseEntity<>(productos, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+
+
+
+
+
+
+
+    }
 }
