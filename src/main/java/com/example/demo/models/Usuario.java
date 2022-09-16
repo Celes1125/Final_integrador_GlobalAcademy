@@ -1,9 +1,7 @@
 package com.example.demo.models;
 
-import java.util.Date;
-
 public class Usuario {
-    private long id;
+    private long idUsuario;
     private String nombre;
     private String apellido;
     private String password;
@@ -14,8 +12,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(long id, String nombre, String apellido, String password, String fecha_nacimiento, String tipo_usuario, String email) {
-        this.id = id;
+    public Usuario(long idUsuario, String nombre, String apellido, String password, String fecha_nacimiento, String tipo_usuario, String email) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.password = password;
@@ -24,12 +22,12 @@ public class Usuario {
         this.email = email;
     }
 
-    public long getId() {
-        return id;
+    public long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -83,7 +81,7 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "id=" + id +
+                "id=" + idUsuario +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", password='" + password + '\'' +

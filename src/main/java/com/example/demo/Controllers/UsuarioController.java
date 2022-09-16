@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -29,13 +28,11 @@ public class UsuarioController {
     )
     @ResponseBody
     public ResponseEntity<ArrayList<Usuario>> crearUsuario(
-            @RequestBody Usuario usuario
+            @RequestBody Usuario nuevoUsuario
 
     ) {
-        return new ResponseEntity<>(usuarioService.crearUsuario(usuario), HttpStatus.CREATED);
+        return usuarioService.crearUsuario(nuevoUsuario);
     }
-
-
 
     //CONSULTAR LISTA DE USUARIOS desde /usuarios
     @GetMapping(
@@ -43,7 +40,7 @@ public class UsuarioController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ArrayList<Usuario> listarUsuarios() {
+    public ResponseEntity<ArrayList<Usuario>> listarUsuarios() {
         return usuarioService.listarUsuarios();
     }
 
@@ -53,8 +50,8 @@ public class UsuarioController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<?> verUsuarioXId(
-            @PathVariable(name = "id") int id
+    public ResponseEntity<Usuario> verUsuarioXId(
+            @PathVariable(name = "id") long id
     ) {
         return usuarioService.verUsuarioXId(id);
     }
@@ -62,16 +59,15 @@ public class UsuarioController {
     //MODIFICAR UN USUARIO desde /usuarios/{id}
 
     @PutMapping(
-            value = "/usuarios/{id}",
+            value = "/usuarios",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public Usuario modificarUsuario(
-            @PathVariable(name = "id") int id,
-            @RequestBody Usuario usuario
+    public ResponseEntity<Usuario> modificarUsuario(
+            @RequestBody Usuario nuevoUsuario
     ) {
-        usuarioService.modificarUsuario(id, usuario);
-        return usuario;
+        return usuarioService.modificarUsuario(nuevoUsuario);
+
     }
 
     //BORRAR UN USUARIO ESPECÍFICO desde /usuarios/{id}
@@ -82,9 +78,10 @@ public class UsuarioController {
     )
     @ResponseBody
     public ResponseEntity<ArrayList<Usuario>> eliminarUsuario(
-            @PathVariable(name = "id") int id
+            @PathVariable(name = "id") long id
     ) {
-        return new ResponseEntity<>(usuarioService.eliminarUsuario(id), HttpStatus.OK);
+        return usuarioService.eliminarUsuario(id);
 
     }
 }
+
