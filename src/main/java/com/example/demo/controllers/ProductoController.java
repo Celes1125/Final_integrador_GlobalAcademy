@@ -1,8 +1,6 @@
-package com.example.demo.Controllers;
-import com.example.demo.Services.ProductoService;
-import com.example.demo.Services.UsuarioService;
+package com.example.demo.controllers;
+import com.example.demo.services.ProductoService;
 import com.example.demo.models.Producto;
-import com.example.demo.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

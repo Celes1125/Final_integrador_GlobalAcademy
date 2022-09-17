@@ -1,5 +1,5 @@
 
-package com.example.demo.Services;
+package com.example.demo.services;
 import com.example.demo.CategoriasSingleton;
 import com.example.demo.models.Producto;
 import org.springframework.http.HttpStatus;
