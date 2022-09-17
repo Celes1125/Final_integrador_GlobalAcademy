@@ -31,7 +31,7 @@ public class ClienteController {
         return clienteService.crearCliente(nuevoCliente);
     }
 
-    //CONSULTAR CLIENTE DE USUARIOS desde /clientes
+    //CONSULTAR LISTA DE CIENTES desde /clientes
     @GetMapping(
             value = "/clientes",
             produces = MediaType.APPLICATION_JSON_VALUE
