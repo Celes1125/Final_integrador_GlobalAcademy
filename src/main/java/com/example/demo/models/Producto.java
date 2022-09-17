@@ -1,7 +1,7 @@
 package com.example.demo.models;
 
 public class Producto {
-    private int idProducto;
+    private long idProducto;
     private String nombreProducto;
     private Double precio;
     private String categoria;
@@ -18,11 +18,11 @@ public class Producto {
         this.stock = stock;
     }
 
-    public int getIdProducto() {
+    public long getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(int idProducto) {
+    public void setIdProducto(long idProducto) {
         this.idProducto = idProducto;
     }
 
