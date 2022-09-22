@@ -9,6 +9,7 @@ public class Usuario {
     private String tipo_usuario;
     private String email;
 
+
     public Usuario() {
     }
 

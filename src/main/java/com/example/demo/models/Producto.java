@@ -5,17 +5,23 @@ public class Producto {
     private String nombreProducto;
     private Double precio;
     private String categoria;
+    private Vendedor vendedor;
     private int stock;
+
 
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombreProducto, Double precio, String categoria, int stock) {
+    public Producto(long idProducto, String nombreProducto, Double precio, String categoria, Vendedor vendedor, int stock) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.precio = precio;
         this.categoria = categoria;
+        this.vendedor = vendedor;
         this.stock = stock;
+    }
+
+    public Producto(long idProducto) {
     }
 
     public long getIdProducto() {
@@ -50,6 +56,14 @@ public class Producto {
         this.categoria = categoria;
     }
 
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -65,6 +79,7 @@ public class Producto {
                 ", nombreProducto='" + nombreProducto + '\'' +
                 ", precio=" + precio +
                 ", categoria='" + categoria + '\'' +
+                ", vendedor=" + vendedor +
                 ", stock=" + stock +
                 '}';
     }
