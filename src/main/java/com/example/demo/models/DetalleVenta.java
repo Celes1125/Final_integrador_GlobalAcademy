@@ -1,10 +1,6 @@
 package com.example.demo.models;
-
 import com.example.demo.CategoriasSingleton;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 public class DetalleVenta {
 
     private long idDetalleVenta;
@@ -12,8 +8,6 @@ public class DetalleVenta {
     private Producto producto;
     private long cantidad;
     private double monto;
-
-
     public DetalleVenta() {
     }
 

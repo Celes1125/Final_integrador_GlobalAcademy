@@ -12,6 +12,11 @@ public class Usuario {
 
     public Usuario() {
     }
+    public Usuario(String password, String email) {
+        this.password = password;
+        this.email = email;
+    }
+
 
     public Usuario(long idUsuario, String nombre, String apellido, String password, String fecha_nacimiento, String tipo_usuario, String email) {
         this.idUsuario = idUsuario;

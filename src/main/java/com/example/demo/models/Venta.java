@@ -1,36 +1,55 @@
 package com.example.demo.models;
 import com.example.demo.CategoriasSingleton;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class Venta {
     private long idVenta;
     private Date fechaDeVenta;
     private SimpleDateFormat entregaEstimada;
     private SimpleDateFormat entregaEfectiva;
-
-    private long idCliente;
-    private ArrayList<DetalleVenta> detalleVenta;
-
+    private Cliente cliente;
+    private ArrayList<DetalleVenta> carrito;
     private double precioTotal;
 
     public Venta() {
     }
 
-    public Venta(long idVenta, Date fechaDeVenta, SimpleDateFormat entregaEstimada, SimpleDateFormat entregaEfectiva, long idCliente, ArrayList<DetalleVenta> detalleVenta, double precioTotal) {
-        this.idVenta = ventas.size() + 1;
+    public Venta(SimpleDateFormat entregaEstimada, SimpleDateFormat entregaEfectiva, Cliente cliente, ArrayList<DetalleVenta> carrito, double precioTotal) {
+
+        this.idVenta = ventas.size()+1;
         this.fechaDeVenta = new Date();
-        this.entregaEstimada = new SimpleDateFormat("dd/MM/yyyy");
-        this.entregaEfectiva = new SimpleDateFormat("dd/MM/yyyy");
-        this.idCliente = idCliente;
-        this.detalleVenta = detalleVenta;
-        this.precioTotal = precioTotal;
+        this.entregaEstimada = cosecharEntregaEstimada();
+        this.entregaEfectiva = cosecharEntregaEfectiva();
+        this.cliente = cliente;
+        this.carrito = agregarCarrito(cliente);
+        this.precioTotal = calcularTotal();
     }
 
-    CategoriasSingleton cs = CategoriasSingleton.getInstance();
-    ArrayList<Venta> ventas = cs.getVentas();
+    private SimpleDateFormat cosecharEntregaEstimada() {
+        entregaEstimada = new SimpleDateFormat("2022/11/23");
+        return entregaEstimada;
+    }
+
+    private SimpleDateFormat cosecharEntregaEfectiva() {
+        entregaEfectiva = new SimpleDateFormat("2022/11/23");
+        return entregaEfectiva;
+    }
+
+
+    private ArrayList<DetalleVenta> agregarCarrito( Cliente cliente) {
+        detalles.stream()
+                .filter(d -> Objects.equals(d.getCliente(), cliente));
+        return carrito;
+    }
+
+    private double calcularTotal() {
+       double total = 100;
+       return total;
+
+    }
 
 
     public long getIdVenta() {
@@ -65,12 +84,12 @@ public class Venta {
         this.entregaEfectiva = entregaEfectiva;
     }
 
-    public long getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(long idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public ArrayList<DetalleVenta> getDetalleVenta() {
@@ -96,9 +115,13 @@ public class Venta {
                 ", fechaDeVenta=" + fechaDeVenta +
                 ", entregaEstimada=" + entregaEstimada +
                 ", entregaEfectiva=" + entregaEfectiva +
-                ", idCliente=" + idCliente +
-                ", detalleVenta=" + detalleVenta +
+                ", cliente=" + cliente +
+                ", carrito=" + carrito +
                 ", precioTotal=" + precioTotal +
                 '}';
     }
+
+    CategoriasSingleton cs = CategoriasSingleton.getInstance();
+    ArrayList<Venta> ventas = cs.getVentas();
+    ArrayList<DetalleVenta> detalles = cs.getDetalles();
 }
