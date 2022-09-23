@@ -23,11 +23,6 @@ public class VentaService {
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
-
-
-
-
     }
 
     private Cliente checarCliente(String password, String email) {

@@ -19,6 +19,15 @@ public class DetalleVenta {
         this.monto = cantidad * producto.getPrecio();
     }
 
+    public DetalleVenta(long idDetalleVenta, Cliente cliente, Producto producto, long cantidad, double monto) {
+        this.idDetalleVenta = idDetalleVenta;
+        this.cliente = cliente;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.monto = monto;
+
+    }
+
     public long getIdDetalleVenta() {
         return idDetalleVenta;
     }

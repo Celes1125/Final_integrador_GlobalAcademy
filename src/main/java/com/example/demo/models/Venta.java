@@ -17,6 +17,11 @@ public class Venta {
     public Venta() {
     }
 
+    public Venta(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+
     public Venta(SimpleDateFormat entregaEstimada, SimpleDateFormat entregaEfectiva, Cliente cliente, ArrayList<DetalleVenta> carrito, double precioTotal) {
 
         this.idVenta = ventas.size()+1;
@@ -92,20 +97,20 @@ public class Venta {
         this.cliente = cliente;
     }
 
-    public ArrayList<DetalleVenta> getDetalleVenta() {
-        return detalleVenta;
-    }
-
-    public void setDetalleVenta(ArrayList<DetalleVenta> detalleVenta) {
-        this.detalleVenta = detalleVenta;
-    }
-
     public double getPrecioTotal() {
         return precioTotal;
     }
 
     public void setPrecioTotal(double precioTotal) {
         this.precioTotal = precioTotal;
+    }
+
+    public ArrayList<DetalleVenta> getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(ArrayList<DetalleVenta> carrito) {
+        this.carrito = carrito;
     }
 
     @Override

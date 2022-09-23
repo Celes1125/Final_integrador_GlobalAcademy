@@ -20,15 +20,16 @@ public class DetalleVentaController {
     }
 
     @PostMapping(
-            value="/detalle",
+            value="/detalles",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<DetalleVenta> generarDetalleVenta (
-            @RequestParam (name="idCliente") long idCliente,
+    public ResponseEntity<DetalleVenta> sumarAlCarrito (
+            @RequestHeader (name="password") String password,
+            @RequestHeader (name="email") String email,
             @RequestParam (name="idProducto") long idProducto,
             @RequestParam (name="cantidad") long cantidad
     ){
-        return DetalleVentaService.generarDetalleVenta(idCliente, idProducto, cantidad);
+        return DetalleVentaService.sumarAlCarrito(password, email, idProducto, cantidad);
     }
 }

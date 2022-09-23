@@ -13,8 +13,8 @@ import java.util.Objects;
 
 @Service
 public class DetalleVentaService {
-    public static ResponseEntity<DetalleVenta> generarDetalleVenta(long idCliente, long idProducto, long cantidad) {
-        Cliente cliente = checarCliente(idCliente);
+    public static ResponseEntity<DetalleVenta> sumarAlCarrito(String password, String email, long idProducto, long cantidad) {
+        Cliente cliente = checarCliente(password, email);
         Producto producto = checarProducto(idProducto, cantidad);
         if(cliente!=null && producto !=null){//ACÁ DESPUÉS VER DE USAR MEJOR UN SWITCH CASE U OTRA COSA PARA QUE DEVUELVA BIEN EL ERROR...
             DetalleVenta detalleVenta = new DetalleVenta(cliente, producto, cantidad);
@@ -24,14 +24,19 @@ public class DetalleVentaService {
         }
     }
 
-    public static Cliente checarCliente(long idCliente){
+    private static Cliente checarCliente(String password, String email) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Cliente> clientes = cs.getClientes();
         Cliente cliente = clientes.stream()
-                .filter(c -> Objects.equals(c.getIdCliente(), idCliente))
+                .filter(c -> Objects.equals(c.getEmail(), email))
                 .findFirst()
                 .orElse(null);
-        return cliente;
+        if (cliente != null && cliente.getPassword()==password) {
+            return cliente;
+        }else{
+            return null;
+        }
+
     }
 
     public static Producto checarProducto(long idProducto, long cantidad) {
