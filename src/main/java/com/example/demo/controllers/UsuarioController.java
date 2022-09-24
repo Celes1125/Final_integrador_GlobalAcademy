@@ -82,5 +82,10 @@ public class UsuarioController {
         return usuarioService.eliminarUsuario(id);
 
     }
+
+    //ver usuarios activos
+    //filtrar por cliente/vendedor/admin...
+    //eliminación lógica del usuario
+    //
 }
 

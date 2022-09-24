@@ -81,6 +81,10 @@ public class ClienteController {
 
     }
 
+    //ver carrito
+    //ver historial de ventas
+
+
 
 
 }

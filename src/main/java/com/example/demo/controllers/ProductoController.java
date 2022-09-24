@@ -80,5 +80,15 @@ public class ProductoController {
         return productoService.bajaProducto(id);
 
     }
+    //FILTROS DE CONSULTA DE PRODUCTO SEGUN DISTINTOS ATRIBUTOS (usar stream lambda)
+    //ver producto x categoria
+    //ver producto x precio / rango de precio?
+    //ver producto x vendedor
+    //ver producto x nombre, ordenar alfabéticamente...
+    //ordenar productos de acuerdo a su precio, descendente y ascendente
+    //ordenar productos por relevancia (usando como criterio el número de ventas asociado al producto...)
+
+
+
 }
 

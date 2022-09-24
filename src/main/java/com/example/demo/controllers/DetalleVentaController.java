@@ -25,8 +25,8 @@ public class DetalleVentaController {
     )
     @ResponseBody
     public ResponseEntity<DetalleVenta> sumarAlCarrito (
-            @RequestHeader (name="password") String password,
-            @RequestHeader (name="email") String email,
+            @RequestHeader (value="password") String password,
+            @RequestHeader (value="email") String email,
             @RequestParam (name="idProducto") long idProducto,
             @RequestParam (name="cantidad") long cantidad
     ){

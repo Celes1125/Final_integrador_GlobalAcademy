@@ -19,11 +19,16 @@ public class VentaController {
     )
     @ResponseBody
     public ResponseEntity<Venta> generarVenta (
-            @RequestHeader (name="password") String password,
-            @RequestHeader (name="email") String email
+            @RequestHeader (value="password") String password,
+            @RequestHeader (value="email") String email
 
 
     ){
         return ventaService.generarVenta(password, email);
     }
+
+    //crud...
+    //ver ventas por fecha
+    //ver ventas por monto total
+
 }

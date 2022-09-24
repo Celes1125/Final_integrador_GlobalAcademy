@@ -1,6 +1,6 @@
 package com.example.demo.models;
 
-public class Usuario {
+public abstract class Usuario {
     private long idUsuario;
     private String nombre;
     private String apellido;
@@ -9,6 +9,12 @@ public class Usuario {
     private String tipo_usuario;
     private String email;
 
+
+    //private boolean isActiveUser;
+    //private boolean isClient;
+    //private boolean isSeller;
+    //private bolean isAdmin;
+    //private ArrayList<DetalleVenta> cart;
 
     public Usuario() {
     }
