@@ -47,12 +47,13 @@ public class Venta {
     private ArrayList<DetalleVenta> agregarCarrito( Cliente cliente) {
         detalles.stream()
                 .filter(d -> Objects.equals(d.getCliente(), cliente));
+
         return carrito;
     }
 
     private double calcularTotal() {
-       double total = 100;
-       return total;
+       precioTotal=100;
+       return precioTotal;
 
     }
 

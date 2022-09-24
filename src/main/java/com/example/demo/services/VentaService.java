@@ -1,7 +1,6 @@
 package com.example.demo.services;
 import com.example.demo.CategoriasSingleton;
 import com.example.demo.models.Cliente;
-import com.example.demo.models.Usuario;
 import com.example.demo.models.Venta;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +31,7 @@ public class VentaService {
                 .filter(c -> Objects.equals(c.getEmail(), email))
                 .findFirst()
                 .orElse(null);
-        if (cliente != null && cliente.getPassword()==password) {
+        if (cliente != null && Objects.equals(cliente.getPassword(),password)) {
             return cliente;
         }else{
             return null;

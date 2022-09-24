@@ -31,7 +31,7 @@ public class DetalleVentaService {
                 .filter(c -> Objects.equals(c.getEmail(), email))
                 .findFirst()
                 .orElse(null);
-        if (cliente != null && cliente.getPassword()==password) {
+        if (cliente != null && Objects.equals(cliente.getPassword(), password)) {
             return cliente;
         }else{
             return null;

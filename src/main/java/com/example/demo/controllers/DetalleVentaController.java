@@ -2,9 +2,7 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.models.DetalleVenta;
-import com.example.demo.models.Producto;
 import com.example.demo.services.DetalleVentaService;
-import com.example.demo.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

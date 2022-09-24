@@ -27,7 +27,7 @@ public class VentaController {
         return ventaService.generarVenta(password, email);
     }
 
-    //crud...
+    //crud...vender, cancelar, despachar????
     //ver ventas por fecha
     //ver ventas por monto total
 
