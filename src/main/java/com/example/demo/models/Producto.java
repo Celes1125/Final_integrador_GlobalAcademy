@@ -1,5 +1,10 @@
 package com.example.demo.models;
 
+import com.example.demo.CategoriasSingleton;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class Producto {
     private long idProducto;
     private String nombreProducto;
@@ -82,5 +87,19 @@ public class Producto {
                 ", vendedor=" + vendedor +
                 ", stock=" + stock +
                 '}';
+    }
+
+    public static Producto ChecarProducto(long idProducto, long cantidad) {
+        CategoriasSingleton cs = CategoriasSingleton.getInstance();
+        ArrayList<Producto> productos = cs.getProductos();
+        Producto producto = productos.stream()
+                .filter(p -> Objects.equals(p.getIdProducto(), idProducto))
+                .findFirst()
+                .orElse(null);
+        if(producto!=null && producto.getStock()>=cantidad){
+            return producto;
+        }else{
+            return null;
+        }
     }
 }

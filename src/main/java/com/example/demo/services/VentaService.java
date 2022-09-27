@@ -15,7 +15,7 @@ public class VentaService {
 
 
     public ResponseEntity<Venta> generarVenta(String password, String email) {
-        Cliente cliente = checarCliente(password, email);
+        Cliente cliente = Cliente.ChecarCliente(password, email);
         if(cliente!=null){
             Venta venta = new Venta(cliente);
             return new ResponseEntity<>(venta, HttpStatus.OK);
@@ -24,18 +24,4 @@ public class VentaService {
         }
     }
 
-    private Cliente checarCliente(String password, String email) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Cliente> clientes = cs.getClientes();
-        Cliente cliente = clientes.stream()
-                .filter(c -> Objects.equals(c.getEmail(), email))
-                .findFirst()
-                .orElse(null);
-        if (cliente != null && Objects.equals(cliente.getPassword(),password)) {
-            return cliente;
-        }else{
-            return null;
-        }
-
-    }
 }

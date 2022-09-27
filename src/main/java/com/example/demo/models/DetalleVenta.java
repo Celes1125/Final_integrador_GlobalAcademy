@@ -4,54 +4,26 @@ import java.util.ArrayList;
 public class DetalleVenta {
 
     private long idDetalleVenta;
-    private Cliente cliente;
     private Producto producto;
     private long cantidad;
     private double monto;
-    public DetalleVenta() {
-    }
 
-    public DetalleVenta(Cliente cliente, Producto producto, long cantidad) {
+    public DetalleVenta(Producto producto, long cantidad) {
         this.idDetalleVenta = detalles.size()+1;
-        this.cliente = cliente;
         this.producto = producto;
         this.cantidad = cantidad;
         this.monto = cantidad * producto.getPrecio();
     }
 
-    public DetalleVenta(long idDetalleVenta, Cliente cliente, Producto producto, long cantidad, double monto) {
-        this.idDetalleVenta = idDetalleVenta;
-        this.cliente = cliente;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.monto = monto;
-
-    }
-
     public long getIdDetalleVenta() {
         return idDetalleVenta;
     }
-
-    public void setIdDetalleVenta(long idDetalleVenta) {
-        this.idDetalleVenta = idDetalleVenta;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
     public Producto getProducto() {
         return producto;
     }
-
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-
     public long getCantidad() {
         return cantidad;
     }
@@ -72,13 +44,11 @@ public class DetalleVenta {
     public String toString() {
         return "DetalleVenta{" +
                 "idDetalleVenta=" + idDetalleVenta +
-                ", cliente=" + cliente +
                 ", producto=" + producto +
                 ", cantidad=" + cantidad +
                 ", monto=" + monto +
                 '}';
     }
-
     CategoriasSingleton cs = CategoriasSingleton.getInstance();
     ArrayList<DetalleVenta> detalles = cs.getDetalles();
 }

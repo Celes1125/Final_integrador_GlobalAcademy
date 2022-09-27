@@ -1,20 +1,13 @@
 package com.example.demo.services;
-
 import com.example.demo.CategoriasSingleton;
 import com.example.demo.models.Cliente;
-import com.example.demo.models.Usuario;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Objects;
-
 @Service
 public class ClienteService {
-
     public ResponseEntity<ArrayList<Cliente>> crearCliente(Cliente nuevoCliente) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Cliente> clientes = cs.getClientes();
@@ -70,7 +63,6 @@ public class ClienteService {
             cliente.setTipo_usuario(nuevoCliente.getTipo_usuario());
             cliente.setEmail(nuevoCliente.getEmail());
             cliente.setIdCliente(nuevoCliente.getIdCliente());
-            cliente.setCompras(nuevoCliente.getCompras());
             return new ResponseEntity<>(nuevoCliente, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import java.util.ArrayList;
+
 public abstract class Usuario {
     private long idUsuario;
     private String nombre;
@@ -8,6 +10,7 @@ public abstract class Usuario {
     private String fecha_nacimiento;
     private String tipo_usuario;
     private String email;
+
 
 
     //private boolean isActiveUser;
@@ -32,6 +35,7 @@ public abstract class Usuario {
         this.fecha_nacimiento = fecha_nacimiento;
         this.tipo_usuario = tipo_usuario;
         this.email = email;
+
     }
 
     public long getIdUsuario() {
@@ -89,6 +93,7 @@ public abstract class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @Override
     public String toString() {

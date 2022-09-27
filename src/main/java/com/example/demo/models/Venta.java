@@ -11,6 +11,7 @@ public class Venta {
     private SimpleDateFormat entregaEstimada;
     private SimpleDateFormat entregaEfectiva;
     private Cliente cliente;
+
     private ArrayList<DetalleVenta> carrito;
     private double precioTotal;
 
@@ -22,14 +23,14 @@ public class Venta {
     }
 
 
-    public Venta(SimpleDateFormat entregaEstimada, SimpleDateFormat entregaEfectiva, Cliente cliente, ArrayList<DetalleVenta> carrito, double precioTotal) {
+    public Venta(SimpleDateFormat entregaEstimada, SimpleDateFormat entregaEfectiva, Cliente cliente, double precioTotal, ArrayList<DetalleVenta> carrito) {
 
         this.idVenta = ventas.size()+1;
         this.fechaDeVenta = new Date();
         this.entregaEstimada = cosecharEntregaEstimada();
         this.entregaEfectiva = cosecharEntregaEfectiva();
         this.cliente = cliente;
-        this.carrito = agregarCarrito(cliente);
+        this.carrito = cliente.getCarrito();
         this.precioTotal = calcularTotal();
     }
 
@@ -45,10 +46,8 @@ public class Venta {
 
 
     private ArrayList<DetalleVenta> agregarCarrito( Cliente cliente) {
-        detalles.stream()
-                .filter(d -> Objects.equals(d.getCliente(), cliente));
-
-        return carrito;
+      ArrayList<DetalleVenta> carrito = cliente.getCarrito();
+      return carrito;
     }
 
     private double calcularTotal() {
@@ -104,14 +103,6 @@ public class Venta {
 
     public void setPrecioTotal(double precioTotal) {
         this.precioTotal = precioTotal;
-    }
-
-    public ArrayList<DetalleVenta> getCarrito() {
-        return carrito;
-    }
-
-    public void setCarrito(ArrayList<DetalleVenta> carrito) {
-        this.carrito = carrito;
     }
 
     @Override

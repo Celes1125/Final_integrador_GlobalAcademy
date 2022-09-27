@@ -13,43 +13,17 @@ import java.util.Objects;
 
 @Service
 public class DetalleVentaService {
-    public static ResponseEntity<DetalleVenta> sumarAlCarrito(String password, String email, long idProducto, long cantidad) {
-        Cliente cliente = checarCliente(password, email);
-        Producto producto = checarProducto(idProducto, cantidad);
+    public static ResponseEntity <ArrayList<DetalleVenta>> sumarAlCarrito(String password, String email, long idProducto, long cantidad) {
+        Cliente cliente= Cliente.ChecarCliente(password, email);
+        Producto producto = Producto.ChecarProducto(idProducto, cantidad);
         if(cliente!=null && producto !=null){//ACÁ DESPUÉS VER DE USAR MEJOR UN SWITCH CASE U OTRA COSA PARA QUE DEVUELVA BIEN EL ERROR...
-            DetalleVenta detalleVenta = new DetalleVenta(cliente, producto, cantidad);
-            return new ResponseEntity<>(detalleVenta, HttpStatus.OK);
+            DetalleVenta detalleVenta = new DetalleVenta(producto, cantidad);
+            Cliente.SumarAlCarrito(detalleVenta);
+
+            return new ResponseEntity<>(cliente.getCarrito(), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    private static Cliente checarCliente(String password, String email) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Cliente> clientes = cs.getClientes();
-        Cliente cliente = clientes.stream()
-                .filter(c -> Objects.equals(c.getEmail(), email))
-                .findFirst()
-                .orElse(null);
-        if (cliente != null && Objects.equals(cliente.getPassword(), password)) {
-            return cliente;
-        }else{
-            return null;
-        }
-
-    }
-
-    public static Producto checarProducto(long idProducto, long cantidad) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Producto> productos = cs.getProductos();
-        Producto producto = productos.stream()
-                .filter(p -> Objects.equals(p.getIdProducto(), idProducto))
-                .findFirst()
-                .orElse(null);
-        if(producto!=null && producto.getStock()>=cantidad){
-            return producto;
-        }else{
-            return null;
-        }
-    }
 }
