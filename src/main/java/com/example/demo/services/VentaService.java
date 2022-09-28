@@ -7,17 +7,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 @Service
 public class VentaService {
 
 
+    public static ResponseEntity<ArrayList<Venta>> listarVentas() {
+        CategoriasSingleton cs = CategoriasSingleton.getInstance();
+        ArrayList<Venta> ventas = cs.getVentas();
+
+        return new ResponseEntity<>(ventas, HttpStatus.OK);
+    }
+
     public ResponseEntity<Venta> generarVenta(String password, String email) {
         Cliente cliente = Cliente.ChecarCliente(password, email);
         if(cliente!=null){
+            CategoriasSingleton cs = CategoriasSingleton.getInstance();
+            ArrayList<Venta> ventas = cs.getVentas();
             Venta venta = new Venta(cliente);
+            cs.setVentas(ventas);
             return new ResponseEntity<>(venta, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

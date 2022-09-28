@@ -3,7 +3,6 @@ import com.example.demo.CategoriasSingleton;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 public class Venta {
     private long idVenta;
@@ -11,8 +10,6 @@ public class Venta {
     private SimpleDateFormat entregaEstimada;
     private SimpleDateFormat entregaEfectiva;
     private Cliente cliente;
-
-    private ArrayList<DetalleVenta> carrito;
     private double precioTotal;
 
     public Venta() {
@@ -23,14 +20,13 @@ public class Venta {
     }
 
 
-    public Venta(SimpleDateFormat entregaEstimada, SimpleDateFormat entregaEfectiva, Cliente cliente, double precioTotal, ArrayList<DetalleVenta> carrito) {
+    public Venta(SimpleDateFormat entregaEstimada, SimpleDateFormat entregaEfectiva, Cliente cliente, double precioTotal) {
 
         this.idVenta = ventas.size()+1;
         this.fechaDeVenta = new Date();
         this.entregaEstimada = cosecharEntregaEstimada();
         this.entregaEfectiva = cosecharEntregaEfectiva();
         this.cliente = cliente;
-        this.carrito = cliente.getCarrito();
         this.precioTotal = calcularTotal();
     }
 
@@ -44,11 +40,6 @@ public class Venta {
         return entregaEfectiva;
     }
 
-
-    private ArrayList<DetalleVenta> agregarCarrito( Cliente cliente) {
-      ArrayList<DetalleVenta> carrito = cliente.getCarrito();
-      return carrito;
-    }
 
     private double calcularTotal() {
        precioTotal=100;
@@ -113,7 +104,7 @@ public class Venta {
                 ", entregaEstimada=" + entregaEstimada +
                 ", entregaEfectiva=" + entregaEfectiva +
                 ", cliente=" + cliente +
-                ", carrito=" + carrito +
+
                 ", precioTotal=" + precioTotal +
                 '}';
     }

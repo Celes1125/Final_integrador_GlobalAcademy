@@ -6,6 +6,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 public class VentaController {
     private final VentaService ventaService;
@@ -25,6 +27,15 @@ public class VentaController {
 
     ){
         return ventaService.generarVenta(password, email);
+    }
+
+    @GetMapping (
+            value="/ventas",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<ArrayList<Venta>> listarVentas (){
+        return VentaService.listarVentas();
     }
 
     //crud...vender, cancelar, despachar????

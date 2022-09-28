@@ -31,8 +31,8 @@ public class Cliente extends Usuario {
 
     }
 
-    public static void VaciarCarrito(){
-        carrito=new ArrayList<>();
+    public void vaciarCarrito(){
+        this.carrito=new ArrayList<>();
     }
     public static Cliente ChecarCliente(String password, String email) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
