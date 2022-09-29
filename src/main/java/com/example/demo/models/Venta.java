@@ -1,43 +1,39 @@
 package com.example.demo.models;
+
 import com.example.demo.CategoriasSingleton;
+
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class Venta {
-    private long idVenta;
+    private String idVenta;
     private Date fechaDeVenta;
-    private SimpleDateFormat entregaEstimada;
-    private SimpleDateFormat entregaEfectiva;
+    private Date entregaEstimada;
+    private Date entregaEfectiva;
     private Cliente cliente;
+    private ArrayList<DetalleVenta> carrito;
     private double precioTotal;
 
-    public Venta() {
-    }
 
     public Venta(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-
-    public Venta(SimpleDateFormat entregaEstimada, SimpleDateFormat entregaEfectiva, Cliente cliente, double precioTotal) {
-
-        this.idVenta = ventas.size()+1;
+        this.idVenta = UUID.randomUUID().toString();
         this.fechaDeVenta = new Date();
-        this.entregaEstimada = cosecharEntregaEstimada();
-        this.entregaEfectiva = cosecharEntregaEfectiva();
-        this.cliente = cliente;
+        this.entregaEstimada = calcularEntrega(fechaDeVenta);
+        this.entregaEfectiva = null;
+        this.carrito = cliente.getCarrito();
         this.precioTotal = calcularTotal();
     }
 
-    private SimpleDateFormat cosecharEntregaEstimada() {
-        entregaEstimada = new SimpleDateFormat("2022/11/23");
-        return entregaEstimada;
-    }
 
-    private SimpleDateFormat cosecharEntregaEfectiva() {
-        entregaEfectiva = new SimpleDateFormat("2022/11/23");
-        return entregaEfectiva;
+    private Date calcularEntrega(Date fechaDeVenta) {
+        Instant instant = fechaDeVenta.toInstant();
+        Instant entregaEstimada = instant.plus(10, ChronoUnit.DAYS);
+        return Date.from(entregaEstimada);
     }
 
 
@@ -47,11 +43,11 @@ public class Venta {
     }
 
 
-    public long getIdVenta() {
+    public String getIdVenta() {
         return idVenta;
     }
 
-    public void setIdVenta(long idVenta) {
+    public void setIdVenta(String idVenta) {
         this.idVenta = idVenta;
     }
 
@@ -63,19 +59,19 @@ public class Venta {
         this.fechaDeVenta = fechaDeVenta;
     }
 
-    public SimpleDateFormat getEntregaEstimada() {
+    public Date getEntregaEstimada() {
         return entregaEstimada;
     }
 
-    public void setEntregaEstimada(SimpleDateFormat entregaEstimada) {
+    public void setEntregaEstimada(Date entregaEstimada) {
         this.entregaEstimada = entregaEstimada;
     }
 
-    public SimpleDateFormat getEntregaEfectiva() {
+    public Date getEntregaEfectiva() {
         return entregaEfectiva;
     }
 
-    public void setEntregaEfectiva(SimpleDateFormat entregaEfectiva) {
+    public void setEntregaEfectiva(Date entregaEfectiva) {
         this.entregaEfectiva = entregaEfectiva;
     }
 
@@ -108,7 +104,5 @@ public class Venta {
                 '}';
     }
 
-    CategoriasSingleton cs = CategoriasSingleton.getInstance();
-    ArrayList<Venta> ventas = cs.getVentas();
-    ArrayList<DetalleVenta> detalles = cs.getDetalles();
+
 }

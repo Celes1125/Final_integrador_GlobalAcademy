@@ -1,9 +1,9 @@
 package com.example.demo.models;
 
-import java.util.ArrayList;
+import java.util.UUID;
 
 public abstract class Usuario {
-    private long idUsuario;
+    private String idUsuario;
     private String nombre;
     private String apellido;
     private String password;
@@ -27,8 +27,8 @@ public abstract class Usuario {
     }
 
 
-    public Usuario(long idUsuario, String nombre, String apellido, String password, String fecha_nacimiento, String tipo_usuario, String email) {
-        this.idUsuario = idUsuario;
+    public Usuario(String nombre, String apellido, String password, String fecha_nacimiento, String tipo_usuario, String email) {
+        this.idUsuario = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.apellido = apellido;
         this.password = password;
@@ -38,11 +38,11 @@ public abstract class Usuario {
 
     }
 
-    public long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 

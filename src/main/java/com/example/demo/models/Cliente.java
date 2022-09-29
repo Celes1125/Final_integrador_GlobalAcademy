@@ -2,21 +2,22 @@ package com.example.demo.models;
 import com.example.demo.CategoriasSingleton;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Cliente extends Usuario {
-    private long idCliente;
+    private String idCliente;
     private static ArrayList<DetalleVenta> carrito;
 
-    public Cliente(long idUsuario, String nombre, String apellido, String password, String fecha_nacimiento, String tipo_usuario, String email, long idCliente, ArrayList<DetalleVenta> carrito) {
-        super(idUsuario, nombre, apellido, password, fecha_nacimiento, tipo_usuario, email);
-        this.idCliente = idCliente;
+    public Cliente(String nombre, String apellido, String password, String fecha_nacimiento, String tipo_usuario, String email) {
+        super(nombre, apellido, password, fecha_nacimiento, tipo_usuario, email);
+        this.idCliente = UUID.randomUUID().toString();
         this.carrito = new ArrayList<>();
     }
 
-    public long getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
-    public void setIdCliente(long idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 

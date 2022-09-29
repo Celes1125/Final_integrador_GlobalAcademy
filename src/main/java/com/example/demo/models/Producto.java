@@ -4,9 +4,10 @@ import com.example.demo.CategoriasSingleton;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Producto {
-    private long idProducto;
+    private String idProducto;
     private String nombreProducto;
     private Double precio;
     private String categoria;
@@ -17,8 +18,8 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(long idProducto, String nombreProducto, Double precio, String categoria, Vendedor vendedor, int stock) {
-        this.idProducto = idProducto;
+    public Producto(String nombreProducto, Double precio, String categoria, Vendedor vendedor, int stock) {
+        this.idProducto = UUID.randomUUID().toString();
         this.nombreProducto = nombreProducto;
         this.precio = precio;
         this.categoria = categoria;
@@ -26,14 +27,13 @@ public class Producto {
         this.stock = stock;
     }
 
-    public Producto(long idProducto) {
-    }
 
-    public long getIdProducto() {
+
+    public String getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(long idProducto) {
+    public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -89,17 +89,14 @@ public class Producto {
                 '}';
     }
 
-    public static Producto ChecarProducto(long idProducto, long cantidad) {
+    public static Producto ChecarProducto(String idProducto, long cantidad) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Producto> productos = cs.getProductos();
-        Producto producto = productos.stream()
+        return productos.stream()
                 .filter(p -> Objects.equals(p.getIdProducto(), idProducto))
+                .filter(p -> p.getStock() >= cantidad)
                 .findFirst()
                 .orElse(null);
-        if(producto!=null && producto.getStock()>=cantidad){
-            return producto;
-        }else{
-            return null;
-        }
+
     }
 }

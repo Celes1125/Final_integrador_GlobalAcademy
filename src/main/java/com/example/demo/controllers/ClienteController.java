@@ -43,7 +43,7 @@ public class ClienteController {
     )
     @ResponseBody
     public ResponseEntity<Cliente> verClienteXId(
-            @PathVariable(name = "id") long id
+            @PathVariable(name = "id") String id
     ) {
         return clienteService.verClienteXId(id);
     }
@@ -68,7 +68,7 @@ public class ClienteController {
     )
     @ResponseBody
     public ResponseEntity<ArrayList<Cliente>> eliminarCliente(
-            @PathVariable(name = "id") long id
+            @PathVariable(name = "id") String id
     ) {
         return clienteService.eliminarCliente(id);
 

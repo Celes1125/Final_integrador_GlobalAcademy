@@ -22,9 +22,9 @@ public class DetalleVentaController {
     public ResponseEntity <ArrayList<DetalleVenta>> sumarAlCarrito (
             @RequestHeader (value="password") String password,
             @RequestHeader (value="email") String email,
-            @RequestParam (name="idProducto") long idProducto,
+            @RequestParam (name="idProducto") String idProducto,
             @RequestParam (name="cantidad") long cantidad
     ){
-        return DetalleVentaService.sumarAlCarrito(password, email, idProducto, cantidad);
+        return detalleVentaService.sumarAlCarrito(password, email, idProducto, cantidad);
     }
 }

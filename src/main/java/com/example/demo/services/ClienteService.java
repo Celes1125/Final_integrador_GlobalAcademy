@@ -32,7 +32,7 @@ public class ClienteService {
         return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
-    public ResponseEntity<Cliente> verClienteXId(long id) {
+    public ResponseEntity<Cliente> verClienteXId(String id) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Cliente> clientes = cs.getClientes();
         Cliente cliente = clientes.stream()
@@ -62,7 +62,6 @@ public class ClienteService {
             cliente.setFecha_nacimiento(nuevoCliente.getFecha_nacimiento());
             cliente.setTipo_usuario(nuevoCliente.getTipo_usuario());
             cliente.setEmail(nuevoCliente.getEmail());
-            cliente.setIdCliente(nuevoCliente.getIdCliente());
             return new ResponseEntity<>(nuevoCliente, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -70,7 +69,7 @@ public class ClienteService {
 
     }
 
-    public ResponseEntity<ArrayList<Cliente>> eliminarCliente(long id) {
+    public ResponseEntity<ArrayList<Cliente>> eliminarCliente(String id) {
 
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Cliente> clientes = cs.getClientes();

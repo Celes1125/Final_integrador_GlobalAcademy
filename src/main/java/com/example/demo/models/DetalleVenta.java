@@ -1,21 +1,20 @@
 package com.example.demo.models;
-import com.example.demo.CategoriasSingleton;
-import java.util.ArrayList;
-public class DetalleVenta {
+import java.util.UUID;
 
-    private long idDetalleVenta;
+public class DetalleVenta {
+    private final String idDetalleVenta;
     private Producto producto;
     private long cantidad;
     private double monto;
 
     public DetalleVenta(Producto producto, long cantidad) {
-        this.idDetalleVenta = detalles.size()+1;
+        this.idDetalleVenta = UUID.randomUUID().toString();
         this.producto = producto;
         this.cantidad = cantidad;
         this.monto = cantidad * producto.getPrecio();
     }
 
-    public long getIdDetalleVenta() {
+    public String getIdDetalleVenta() {
         return idDetalleVenta;
     }
     public Producto getProducto() {
@@ -49,6 +48,5 @@ public class DetalleVenta {
                 ", monto=" + monto +
                 '}';
     }
-    CategoriasSingleton cs = CategoriasSingleton.getInstance();
-    ArrayList<DetalleVenta> detalles = cs.getDetalles();
+
 }

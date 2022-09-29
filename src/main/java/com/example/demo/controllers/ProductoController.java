@@ -48,7 +48,7 @@ public class ProductoController {
     )
     @ResponseBody
     public ResponseEntity<Producto> verProductoXId(
-            @PathVariable(name = "id") long id
+            @PathVariable(name = "id") String id
     ) {
         return productoService.verProductoXId(id);
     }
@@ -75,7 +75,7 @@ public class ProductoController {
     )
     @ResponseBody
     public ResponseEntity<ArrayList<Producto>> bajaProducto(
-            @PathVariable(name = "id") long id
+            @PathVariable(name = "id") String id
     ) {
         return productoService.bajaProducto(id);
 
