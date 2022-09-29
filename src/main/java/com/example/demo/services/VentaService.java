@@ -26,6 +26,7 @@ public class VentaService {
             CategoriasSingleton cs = CategoriasSingleton.getInstance();
             ArrayList<Venta> ventas = cs.getVentas();
             Venta venta = new Venta(cliente);
+            ventas.add(venta);
             cs.setVentas(ventas);
             return new ResponseEntity<>(venta, HttpStatus.OK);
         }else{

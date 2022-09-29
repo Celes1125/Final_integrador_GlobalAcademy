@@ -42,9 +42,8 @@ public class Venta {
 
 
     private double calcularTotal() {
-       precioTotal=100;
+       precioTotal=0;
        return precioTotal;
-
     }
 
 
