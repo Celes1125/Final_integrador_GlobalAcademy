@@ -1,11 +1,10 @@
 package com.example.demo.models;
+import org.springframework.cglib.core.Local;
 
-import com.example.demo.CategoriasSingleton;
-
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -23,18 +22,20 @@ public class Venta {
         this.cliente = cliente;
         this.idVenta = UUID.randomUUID().toString();
         this.fechaDeVenta = new Date();
-        this.entregaEstimada = calcularEntrega(fechaDeVenta);
+        this.entregaEstimada = entregaEstimada(fechaDeVenta);
         this.entregaEfectiva = null;
         this.carrito = cliente.getCarrito();
         this.precioTotal = calcularTotal();
     }
 
-
-    private Date calcularEntrega(Date fechaDeVenta) {
-        Instant instant = fechaDeVenta.toInstant();
-        Instant entregaEstimada = instant.plus(10, ChronoUnit.DAYS);
-        return Date.from(entregaEstimada);
+    private Date entregaEstimada(Date fechaDeVenta) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaDeVenta);
+        calendar.add(Calendar.DAY_OF_YEAR, 10);
+        return calendar.getTime();
     }
+
+
 
 
     private double calcularTotal() {
