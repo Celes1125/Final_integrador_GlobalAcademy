@@ -1,8 +1,7 @@
 package com.example.demo.models;
 import org.springframework.cglib.core.Local;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,19 +19,22 @@ public class Venta {
 
     public Venta(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public void realizarVenta () {
         this.idVenta = UUID.randomUUID().toString();
         this.fechaDeVenta = new Date();
-        this.entregaEstimada = entregaEstimada(fechaDeVenta);
+        entregaEstimada(fechaDeVenta);
         this.entregaEfectiva = null;
         this.carrito = cliente.getCarrito();
         this.precioTotal = calcularTotal();
     }
 
-    private Date entregaEstimada(Date fechaDeVenta) {
+    private void entregaEstimada(Date fechaDeVenta) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaDeVenta);
         calendar.add(Calendar.DAY_OF_YEAR, 10);
-        return calendar.getTime();
+        this.entregaEstimada = calendar.getTime();
     }
 
 
