@@ -81,6 +81,7 @@ public class VendedorController {
 
     }
 
-
+     //ver listax de productos del vendedor
+    //ver sus productos vendidos, ordenar x fecha y precio
 
 }

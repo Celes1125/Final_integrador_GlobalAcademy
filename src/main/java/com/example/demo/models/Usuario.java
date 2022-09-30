@@ -1,7 +1,9 @@
 package com.example.demo.models;
 
-public class Usuario {
-    private long idUsuario;
+import java.util.UUID;
+
+public abstract class Usuario {
+    private String idUsuario;
     private String nombre;
     private String apellido;
     private String password;
@@ -9,24 +11,38 @@ public class Usuario {
     private String tipo_usuario;
     private String email;
 
+
+
+    //private boolean isActiveUser;
+    //private boolean isClient;
+    //private boolean isSeller;
+    //private bolean isAdmin;
+    //private ArrayList<DetalleVenta> cart;
+
     public Usuario() {
     }
+    public Usuario(String password, String email) {
+        this.password = password;
+        this.email = email;
+    }
 
-    public Usuario(long idUsuario, String nombre, String apellido, String password, String fecha_nacimiento, String tipo_usuario, String email) {
-        this.idUsuario = idUsuario;
+
+    public Usuario(String nombre, String apellido, String password, String fecha_nacimiento, String tipo_usuario, String email) {
+        this.idUsuario = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.apellido = apellido;
         this.password = password;
         this.fecha_nacimiento = fecha_nacimiento;
         this.tipo_usuario = tipo_usuario;
         this.email = email;
+
     }
 
-    public long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -77,6 +93,7 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @Override
     public String toString() {

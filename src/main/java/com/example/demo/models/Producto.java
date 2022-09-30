@@ -1,28 +1,39 @@
 package com.example.demo.models;
 
+import com.example.demo.CategoriasSingleton;
+
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.UUID;
+
 public class Producto {
-    private long idProducto;
+    private String idProducto;
     private String nombreProducto;
     private Double precio;
     private String categoria;
+    private Vendedor vendedor;
     private int stock;
+
 
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombreProducto, Double precio, String categoria, int stock) {
-        this.idProducto = idProducto;
+    public Producto(String nombreProducto, Double precio, String categoria, Vendedor vendedor, int stock) {
+        this.idProducto = UUID.randomUUID().toString();
         this.nombreProducto = nombreProducto;
         this.precio = precio;
         this.categoria = categoria;
+        this.vendedor = vendedor;
         this.stock = stock;
     }
 
-    public long getIdProducto() {
+
+
+    public String getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(long idProducto) {
+    public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -50,6 +61,14 @@ public class Producto {
         this.categoria = categoria;
     }
 
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -65,7 +84,19 @@ public class Producto {
                 ", nombreProducto='" + nombreProducto + '\'' +
                 ", precio=" + precio +
                 ", categoria='" + categoria + '\'' +
+                ", vendedor=" + vendedor +
                 ", stock=" + stock +
                 '}';
+    }
+
+    public static Producto ChecarProducto(String idProducto, long cantidad) {
+        CategoriasSingleton cs = CategoriasSingleton.getInstance();
+        ArrayList<Producto> productos = cs.getProductos();
+        return productos.stream()
+                .filter(p -> Objects.equals(p.getIdProducto(), idProducto))
+                .filter(p -> p.getStock() >= cantidad)
+                .findFirst()
+                .orElse(null);
+
     }
 }

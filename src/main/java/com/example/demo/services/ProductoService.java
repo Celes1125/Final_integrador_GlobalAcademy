@@ -12,21 +12,15 @@ import java.util.Objects;
 public class ProductoService {
 
     public ResponseEntity<ArrayList<Producto>> crearProducto(Producto nuevoProducto) {
+
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Producto> productos = cs.getProductos();
+        //le saqué el chequeo por id porque no le veo el sentido luego de que el id se genere por UUID...
+        Producto producto = new Producto(nuevoProducto.getNombreProducto(), nuevoProducto.getPrecio(), nuevoProducto.getCategoria(), nuevoProducto.getVendedor(), nuevoProducto.getStock());
+        productos.add(producto);
+        cs.setProductos(productos);
+        return new ResponseEntity<>(productos, HttpStatus.OK);
 
-        Producto producto = productos.stream()
-                .filter(u -> Objects.equals(u.getIdProducto(), nuevoProducto.getIdProducto()))
-                .findFirst()
-                .orElse(null);
-
-        if(producto == null){
-            productos.add(nuevoProducto);
-            cs.setProductos(productos);
-            return new ResponseEntity<>(productos, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
     }
 
     public ResponseEntity<ArrayList<Producto>> listarProductos() {
@@ -35,7 +29,7 @@ public class ProductoService {
         return new ResponseEntity<>(productos, HttpStatus.OK);
     }
 
-    public ResponseEntity<Producto> verProductoXId(long id) {
+    public ResponseEntity<Producto> verProductoXId(String id) {
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Producto> productos = cs.getProductos();
         Producto producto = productos.stream()
@@ -70,7 +64,7 @@ public class ProductoService {
 
     }
 
-    public ResponseEntity<ArrayList<Producto>> bajaProducto(long id) {
+    public ResponseEntity<ArrayList<Producto>> bajaProducto(String id) {
 
         CategoriasSingleton cs = CategoriasSingleton.getInstance();
         ArrayList<Producto> productos = cs.getProductos();
