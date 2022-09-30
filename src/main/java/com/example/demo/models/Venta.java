@@ -1,5 +1,4 @@
 package com.example.demo.models;
-import org.springframework.cglib.core.Local;
 
 
 import java.util.ArrayList;
@@ -27,24 +26,28 @@ public class Venta {
         entregaEstimada(fechaDeVenta);
         this.entregaEfectiva = null;
         this.carrito = cliente.getCarrito();
-        this.precioTotal = calcularTotal();
+        //mostrarCarrito();
+        calcularTotal();
     }
 
+    /*private void mostrarCarrito () {
+        ArrayList <DetalleVenta> carrito = new ArrayList<>();
+        carrito = cliente.getCarrito();
+        this.carrito = carrito;
+    }*/
+    private void calcularTotal() {
+        Double total=0d;
+        total= this.cliente.getCarrito().stream()
+                .mapToDouble(detalleVenta -> detalleVenta.getMonto())
+                .sum();
+        this.precioTotal = total;
+    }
     private void entregaEstimada(Date fechaDeVenta) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaDeVenta);
         calendar.add(Calendar.DAY_OF_YEAR, 10);
         this.entregaEstimada = calendar.getTime();
     }
-
-
-
-
-    private double calcularTotal() {
-       precioTotal=0;
-       return precioTotal;
-    }
-
 
     public String getIdVenta() {
         return idVenta;
@@ -102,7 +105,7 @@ public class Venta {
                 ", entregaEstimada=" + entregaEstimada +
                 ", entregaEfectiva=" + entregaEfectiva +
                 ", cliente=" + cliente +
-
+                ", carrito=" + carrito +
                 ", precioTotal=" + precioTotal +
                 '}';
     }
