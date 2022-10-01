@@ -28,6 +28,17 @@ public class Venta {
         this.carrito = cliente.getCarrito();
         //mostrarCarrito();
         calcularTotal();
+        recalcularStock();
+        cliente.vaciarCarrito();
+
+    }
+
+    private void recalcularStock() {
+        ArrayList<DetalleVenta> carrito = cliente.getCarrito();
+        carrito.stream().forEach(d -> {
+            Producto.ChecarProducto(d.getProducto().getIdProducto(), d.getCantidad());
+        });
+
     }
 
     /*private void mostrarCarrito () {
