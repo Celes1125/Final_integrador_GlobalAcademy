@@ -3,8 +3,8 @@
 
 package com.example.demo.services;
 
-import com.example.demo.CategoriasSingleton;
-import com.example.demo.models.Usuario;
+import com.example.demo.SingletonCategories;
+import com.example.demo.models.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,81 +15,81 @@ import java.util.Objects;
 @Service
 public class UsuarioService {
 
-    public ResponseEntity<ArrayList<Usuario>> crearUsuario(Usuario nuevoUsuario) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Usuario> usuarios = cs.getUsuarios();
+    public ResponseEntity<ArrayList<User>> crearUsuario(User nuevoUser) {
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<User> users = cs.getUsers();
 
-        Usuario usuario = usuarios.stream()
-                .filter(u -> Objects.equals(u.getIdUsuario(), nuevoUsuario.getIdUsuario()))
+        User user = users.stream()
+                .filter(u -> Objects.equals(u.getUserId(), nuevoUser.getUserId()))
                 .findFirst()
                 .orElse(null);
 
-        if(usuario == null){
-            usuarios.add(nuevoUsuario);
-            cs.setUsuarios(usuarios);
-            return new ResponseEntity<>(usuarios, HttpStatus.OK);
+        if(user == null){
+            users.add(nuevoUser);
+            cs.setUsers(users);
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    public ResponseEntity<ArrayList<Usuario>> listarUsuarios() {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Usuario> usuarios = cs.getUsuarios();
-        return new ResponseEntity<>(usuarios, HttpStatus.OK);
+    public ResponseEntity<ArrayList<User>> listarUsuarios() {
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<User> users = cs.getUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    public ResponseEntity<Usuario> verUsuarioXId(long id) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Usuario> usuarios = cs.getUsuarios();
-        Usuario usuario = usuarios.stream()
-                .filter(u -> Objects.equals(u.getIdUsuario(), id))
+    public ResponseEntity<User> verUsuarioXId(long id) {
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<User> users = cs.getUsers();
+        User user = users.stream()
+                .filter(u -> Objects.equals(u.getUserId(), id))
                 .findFirst()
                 .orElse(null);
 
-        if(usuario != null){
-            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        if(user != null){
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    public ResponseEntity<Usuario> modificarUsuario(Usuario nuevoUsuario) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Usuario> usuarios = cs.getUsuarios();
-        Usuario usuario = usuarios.stream()
-                .filter(u -> Objects.equals(u.getIdUsuario(), nuevoUsuario.getIdUsuario()))
+    public ResponseEntity<User> modificarUsuario(User nuevoUser) {
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<User> users = cs.getUsers();
+        User user = users.stream()
+                .filter(u -> Objects.equals(u.getUserId(), nuevoUser.getUserId()))
                 .findFirst()
                 .orElse(null);
 
-        if(usuario != null){
-            usuario.setNombre(nuevoUsuario.getNombre());
-            usuario.setApellido(nuevoUsuario.getApellido());
-            usuario.setPassword(nuevoUsuario.getPassword());
-            usuario.setFecha_nacimiento(nuevoUsuario.getFecha_nacimiento());
-            usuario.setTipo_usuario(nuevoUsuario.getTipo_usuario());
-            usuario.setEmail(nuevoUsuario.getEmail());
-            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        if(user != null){
+            user.setName(nuevoUser.getName());
+            user.setSurname(nuevoUser.getSurname());
+            user.setPassword(nuevoUser.getPassword());
+            user.setBirthDate(nuevoUser.getBirthDate());
+            user.setTipo_usuario(nuevoUser.getTipo_usuario());
+            user.setEmail(nuevoUser.getEmail());
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }
 
-    public ResponseEntity<ArrayList<Usuario>> eliminarUsuario(long id) {
+    public ResponseEntity<ArrayList<User>> eliminarUsuario(long id) {
 
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Usuario> usuarios = cs.getUsuarios();
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<User> users = cs.getUsers();
 
-        Usuario usuario = usuarios.stream()
-                .filter(u -> Objects.equals(u.getIdUsuario(), id))
+        User user = users.stream()
+                .filter(u -> Objects.equals(u.getUserId(), id))
                 .findFirst()
                 .orElse(null);
 
-        if(usuario != null){
-            usuarios.remove(usuario);
-            cs.setUsuarios(usuarios);
-            return new ResponseEntity<>(usuarios, HttpStatus.OK);
+        if(user != null){
+            users.remove(user);
+            cs.setUsers(users);
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

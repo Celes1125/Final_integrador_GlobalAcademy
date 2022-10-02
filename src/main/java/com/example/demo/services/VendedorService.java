@@ -1,5 +1,5 @@
 package com.example.demo.services;
-import com.example.demo.CategoriasSingleton;
+import com.example.demo.SingletonCategories;
 import com.example.demo.models.Vendedor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +10,8 @@ import java.util.Objects;
 @Service
 public class VendedorService {
     public ResponseEntity<ArrayList<Vendedor>> crearVendedor(Vendedor nuevoVendedor) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Vendedor> vendedores = cs.getVendedores();
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<Vendedor> vendedores = cs.getSellers();
 
         Vendedor vendedor = vendedores.stream()
                 .filter(v -> Objects.equals(v.getIdVendedor(), nuevoVendedor.getIdVendedor()))
@@ -20,7 +20,7 @@ public class VendedorService {
 
         if(vendedor == null){
             vendedores.add(nuevoVendedor);
-            cs.setVendedores(vendedores);
+            cs.setSellers(vendedores);
             return new ResponseEntity<>(vendedores, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -28,14 +28,14 @@ public class VendedorService {
     }
 
     public ResponseEntity<ArrayList<Vendedor>> listarVendedores() {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Vendedor> vendedores = cs.getVendedores();
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<Vendedor> vendedores = cs.getSellers();
         return new ResponseEntity<>(vendedores, HttpStatus.OK);
     }
 
     public ResponseEntity<Vendedor> verVendedorXId(long id) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Vendedor> vendedores = cs.getVendedores();
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<Vendedor> vendedores = cs.getSellers();
         Vendedor vendedor = vendedores.stream()
                 .filter(c -> Objects.equals(c.getIdVendedor(), id))
                 .findFirst()
@@ -49,18 +49,18 @@ public class VendedorService {
     }
 
     public ResponseEntity<Vendedor> modificarVendedor (Vendedor nuevoVendedor) {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Vendedor> vendedores = cs.getVendedores();
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<Vendedor> vendedores = cs.getSellers();
         Vendedor vendedor = vendedores.stream()
                 .filter(c -> Objects.equals(c.getIdVendedor(), nuevoVendedor.getIdVendedor()))
                 .findFirst()
                 .orElse(null);
 
         if(vendedor != null){
-            vendedor.setNombre(nuevoVendedor.getNombre());
-            vendedor.setApellido(nuevoVendedor.getApellido());
+            vendedor.setName(nuevoVendedor.getName());
+            vendedor.setSurname(nuevoVendedor.getSurname());
             vendedor.setPassword(nuevoVendedor.getPassword());
-            vendedor.setFecha_nacimiento(nuevoVendedor.getFecha_nacimiento());
+            vendedor.setBirthDate(nuevoVendedor.getBirthDate());
             vendedor.setTipo_usuario(nuevoVendedor.getTipo_usuario());
             vendedor.setEmail(nuevoVendedor.getEmail());
             vendedor.setIdVendedor(nuevoVendedor.getIdVendedor());
@@ -74,8 +74,8 @@ public class VendedorService {
 
     public ResponseEntity<ArrayList<Vendedor>> eliminarVendedor(long id) {
 
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Vendedor> vendedores = cs.getVendedores();
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<Vendedor> vendedores = cs.getSellers();
 
         Vendedor vendedor = vendedores.stream()
                 .filter(v -> Objects.equals(v.getIdVendedor(), id))
@@ -84,7 +84,7 @@ public class VendedorService {
 
         if(vendedor != null){
             vendedores.remove(vendedor);
-            cs.setVendedores(vendedores);
+            cs.setSellers(vendedores);
             return new ResponseEntity<>(vendedores, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

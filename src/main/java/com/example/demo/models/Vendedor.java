@@ -2,7 +2,7 @@ package com.example.demo.models;
 
 import java.util.UUID;
 
-public class Vendedor extends Usuario{
+public class Vendedor extends User {
     private String idVendedor;
     private int ventas;
 

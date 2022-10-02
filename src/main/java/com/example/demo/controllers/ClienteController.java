@@ -1,5 +1,5 @@
 package com.example.demo.controllers;
-import com.example.demo.models.Cliente;
+import com.example.demo.models.Client;
 import com.example.demo.services.ClienteService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +19,11 @@ public class ClienteController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Cliente>> crearCliente(
-            @RequestBody Cliente nuevoCliente
+    public ResponseEntity<ArrayList<Client>> crearCliente(
+            @RequestBody Client nuevoClient
 
     ) {
-        return clienteService.crearCliente(nuevoCliente);
+        return clienteService.crearCliente(nuevoClient);
     }
 
     //CONSULTAR LISTA DE CIENTES desde /clientes
@@ -32,7 +32,7 @@ public class ClienteController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Cliente>> listarClientes() {
+    public ResponseEntity<ArrayList<Client>> listarClientes() {
         return clienteService.listarClientes();
     }
 
@@ -42,7 +42,7 @@ public class ClienteController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Cliente> verClienteXId(
+    public ResponseEntity<Client> verClienteXId(
             @PathVariable(name = "id") String id
     ) {
         return clienteService.verClienteXId(id);
@@ -54,10 +54,10 @@ public class ClienteController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Cliente> modificarCliente(
-            @RequestBody Cliente nuevoCliente
+    public ResponseEntity<Client> modificarCliente(
+            @RequestBody Client nuevoClient
     ) {
-        return clienteService.modificarCliente(nuevoCliente);
+        return clienteService.modificarCliente(nuevoClient);
 
     }
 
@@ -67,7 +67,7 @@ public class ClienteController {
 
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Cliente>> eliminarCliente(
+    public ResponseEntity<ArrayList<Client>> eliminarCliente(
             @PathVariable(name = "id") String id
     ) {
         return clienteService.eliminarCliente(id);

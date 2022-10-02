@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 import com.example.demo.services.ProductoService;
-import com.example.demo.models.Producto;
+import com.example.demo.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +24,11 @@ public class ProductoController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Producto>> crearProducto(
-            @RequestBody Producto nuevoProducto
+    public ResponseEntity<ArrayList<Product>> crearProducto(
+            @RequestBody Product nuevoProduct
 
     ) {
-        return productoService.crearProducto(nuevoProducto);
+        return productoService.crearProducto(nuevoProduct);
     }
 
     //CONSULTAR LISTA DE PRODUCTOS desde /productos
@@ -37,7 +37,7 @@ public class ProductoController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Producto>> listarProductos() {
+    public ResponseEntity<ArrayList<Product>> listarProductos() {
         return productoService.listarProductos();
     }
 
@@ -47,7 +47,7 @@ public class ProductoController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Producto> verProductoXId(
+    public ResponseEntity<Product> verProductoXId(
             @PathVariable(name = "id") String id
     ) {
         return productoService.verProductoXId(id);
@@ -60,10 +60,10 @@ public class ProductoController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Producto> modificarProducto(
-            @RequestBody Producto nuevoProducto
+    public ResponseEntity<Product> modificarProducto(
+            @RequestBody Product nuevoProduct
     ) {
-        return productoService.modificarProducto(nuevoProducto);
+        return productoService.modificarProducto(nuevoProduct);
 
     }
 
@@ -74,7 +74,7 @@ public class ProductoController {
 
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Producto>> bajaProducto(
+    public ResponseEntity<ArrayList<Product>> bajaProducto(
             @PathVariable(name = "id") String id
     ) {
         return productoService.bajaProducto(id);

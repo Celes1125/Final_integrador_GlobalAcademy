@@ -1,5 +1,5 @@
 package com.example.demo.controllers;
-import com.example.demo.models.DetalleVenta;
+import com.example.demo.models.saleDetail;
 import com.example.demo.services.DetalleVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,11 +19,11 @@ public class DetalleVentaController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity <ArrayList<DetalleVenta>> sumarAlCarrito (
+    public ResponseEntity <ArrayList<saleDetail>> sumarAlCarrito (
             @RequestHeader (value="password") String password,
             @RequestHeader (value="email") String email,
             @RequestParam (name="idProducto") String idProducto,
-            @RequestParam (name="cantidad") long cantidad
+            @RequestParam (name="cantidad") int cantidad
     ){
         return detalleVentaService.sumarAlCarrito(password, email, idProducto, cantidad);
     }

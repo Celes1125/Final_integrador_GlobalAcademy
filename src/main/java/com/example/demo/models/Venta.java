@@ -11,13 +11,13 @@ public class Venta {
     private Date fechaDeVenta;
     private Date entregaEstimada;
     private Date entregaEfectiva;
-    private Cliente cliente;
-    private ArrayList<DetalleVenta> carrito;
+    private Client client;
+    private ArrayList<saleDetail> carrito;
     private double precioTotal;
 
 
-    public Venta(Cliente cliente) {
-        this.cliente = cliente;
+    public Venta(Client client) {
+        this.client = client;
     }
 
     public void realizarVenta () {
@@ -25,18 +25,18 @@ public class Venta {
         this.fechaDeVenta = new Date();
         entregaEstimada(fechaDeVenta);
         this.entregaEfectiva = null;
-        this.carrito = cliente.getCarrito();
+        this.carrito = client.getCarrito();
         //mostrarCarrito();
         calcularTotal();
         recalcularStock();
-        cliente.vaciarCarrito();
+        client.vaciarCarrito();
 
     }
 
     private void recalcularStock() {
-        ArrayList<DetalleVenta> carrito = cliente.getCarrito();
+        ArrayList<saleDetail> carrito = client.getCarrito();
         carrito.stream().forEach(d -> {
-            Producto.ChecarProducto(d.getProducto().getIdProducto(), d.getCantidad());
+            Product.CheckProduct(d.getProduct().getProductId(), d.getUnits());
         });
 
     }
@@ -48,7 +48,7 @@ public class Venta {
     }*/
     private void calcularTotal() {
         Double total=0d;
-        total= this.cliente.getCarrito().stream()
+        total= this.client.getCarrito().stream()
                 .mapToDouble(detalleVenta -> detalleVenta.getMonto())
                 .sum();
         this.precioTotal = total;
@@ -92,12 +92,12 @@ public class Venta {
         this.entregaEfectiva = entregaEfectiva;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Client getCliente() {
+        return client;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(Client client) {
+        this.client = client;
     }
 
     public double getPrecioTotal() {
@@ -115,7 +115,7 @@ public class Venta {
                 ", fechaDeVenta=" + fechaDeVenta +
                 ", entregaEstimada=" + entregaEstimada +
                 ", entregaEfectiva=" + entregaEfectiva +
-                ", cliente=" + cliente +
+                ", cliente=" + client +
                 ", carrito=" + carrito +
                 ", precioTotal=" + precioTotal +
                 '}';

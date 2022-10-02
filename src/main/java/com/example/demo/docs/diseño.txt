@@ -27,7 +27,7 @@ Class Venta{
 -fechaCreacion
 -entregaEstimada
 -entregaEfectiva
--detalleVenta
+-saleDetail
 generarVenta()
 cancelarVEnta()
 }

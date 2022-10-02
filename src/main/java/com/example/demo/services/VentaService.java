@@ -1,6 +1,6 @@
 package com.example.demo.services;
-import com.example.demo.CategoriasSingleton;
-import com.example.demo.models.Cliente;
+import com.example.demo.SingletonCategories;
+import com.example.demo.models.Client;
 import com.example.demo.models.Venta;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,21 +14,21 @@ public class VentaService {
 
 
     public static ResponseEntity<ArrayList<Venta>> listarVentas() {
-        CategoriasSingleton cs = CategoriasSingleton.getInstance();
-        ArrayList<Venta> ventas = cs.getVentas();
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<Venta> ventas = cs.getSales();
 
         return new ResponseEntity<>(ventas, HttpStatus.OK);
     }
 
     public ResponseEntity<Venta> generarVenta(String password, String email) {
-        Cliente cliente = Cliente.ChecarCliente(password, email);
-        if(cliente!=null){
-            CategoriasSingleton cs = CategoriasSingleton.getInstance();
-            ArrayList<Venta> ventas = cs.getVentas();
-            Venta venta = new Venta(cliente);
+        Client client = Client.ChecarCliente(password, email);
+        if(client !=null){
+            SingletonCategories cs = SingletonCategories.getInstance();
+            ArrayList<Venta> ventas = cs.getSales();
+            Venta venta = new Venta(client);
             venta.realizarVenta();
             ventas.add(venta);
-            cs.setVentas(ventas);
+            cs.setSales(ventas);
             return new ResponseEntity<>(venta, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

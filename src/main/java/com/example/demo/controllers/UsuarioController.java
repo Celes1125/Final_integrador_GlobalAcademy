@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.services.UsuarioService;
-import com.example.demo.models.Usuario;
+import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +26,11 @@ public class UsuarioController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Usuario>> crearUsuario(
-            @RequestBody Usuario nuevoUsuario
+    public ResponseEntity<ArrayList<User>> crearUsuario(
+            @RequestBody User nuevoUser
 
     ) {
-        return usuarioService.crearUsuario(nuevoUsuario);
+        return usuarioService.crearUsuario(nuevoUser);
     }
 
     //CONSULTAR LISTA DE USUARIOS desde /usuarios
@@ -39,7 +39,7 @@ public class UsuarioController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Usuario>> listarUsuarios() {
+    public ResponseEntity<ArrayList<User>> listarUsuarios() {
         return usuarioService.listarUsuarios();
     }
 
@@ -49,7 +49,7 @@ public class UsuarioController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Usuario> verUsuarioXId(
+    public ResponseEntity<User> verUsuarioXId(
             @PathVariable(name = "id") long id
     ) {
         return usuarioService.verUsuarioXId(id);
@@ -62,10 +62,10 @@ public class UsuarioController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Usuario> modificarUsuario(
-            @RequestBody Usuario nuevoUsuario
+    public ResponseEntity<User> modificarUsuario(
+            @RequestBody User nuevoUser
     ) {
-        return usuarioService.modificarUsuario(nuevoUsuario);
+        return usuarioService.modificarUsuario(nuevoUser);
 
     }
 
@@ -76,7 +76,7 @@ public class UsuarioController {
 
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Usuario>> eliminarUsuario(
+    public ResponseEntity<ArrayList<User>> eliminarUsuario(
             @PathVariable(name = "id") long id
     ) {
         return usuarioService.eliminarUsuario(id);
