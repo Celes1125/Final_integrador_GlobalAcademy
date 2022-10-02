@@ -11,14 +11,14 @@ public class Product {
     private String name;
     private Double price;
     private String category;
-    private Vendedor seller;
+    private Seller seller;
     private int stock;
 
 
     public Product() {
     }
 
-    public Product(String name, Double price, String category, Vendedor seller, int stock) {
+    public Product(String name, Double price, String category, Seller seller, int stock) {
         this.productId = UUID.randomUUID().toString();
         this.name = name;
         this.price = price;
@@ -59,11 +59,11 @@ public class Product {
         this.category = category;
     }
 
-    public Vendedor getSeller() {
+    public Seller getSeller() {
         return seller;
     }
 
-    public void setSeller(Vendedor seller) {
+    public void setSeller(Seller seller) {
         this.seller = seller;
     }
 

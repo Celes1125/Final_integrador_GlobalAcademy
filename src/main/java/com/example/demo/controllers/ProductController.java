@@ -1,5 +1,5 @@
 package com.example.demo.controllers;
-import com.example.demo.services.ProductoService;
+import com.example.demo.services.ProductService;
 import com.example.demo.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,76 +8,76 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-public class ProductoController {
+public class ProductController {
 
     @Autowired
-    private final ProductoService productoService;
+    private final ProductService productService;
 
-    public ProductoController(ProductoService productoService) {
-        this.productoService = productoService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
-    //CREAR PRODUCTO desde /productos
+    //CREAR PRODUCTO desde /products
 
     @PostMapping(
-            value = "/productos",
+            value = "/products",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Product>> crearProducto(
-            @RequestBody Product nuevoProduct
+    public ResponseEntity<ArrayList<Product>> createProduct(
+            @RequestBody Product newProduct
 
     ) {
-        return productoService.crearProducto(nuevoProduct);
+        return productService.createProduct(newProduct);
     }
 
-    //CONSULTAR LISTA DE PRODUCTOS desde /productos
+    //CONSULTAR LISTA DE PRODUCTOS desde /products
     @GetMapping(
-            value = "/productos",
+            value = "/products",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Product>> listarProductos() {
-        return productoService.listarProductos();
+    public ResponseEntity<ArrayList<Product>> listProducts() {
+        return productService.listProducts();
     }
 
-    //CONSULTAR UN PRODUCTO ESPECÍFICO desde /productos/{id}
+    //CONSULTAR UN PRODUCTO ESPECÍFICO desde /products/{id}
     @GetMapping(
-            value = "/productos/{id}",
+            value = "/products/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Product> verProductoXId(
+    public ResponseEntity<Product> getProductById(
             @PathVariable(name = "id") String id
     ) {
-        return productoService.verProductoXId(id);
+        return productService.getProductById(id);
     }
 
-    //MODIFICAR UN PRODUCTO desde /productos/{id}
+    //MODIFICAR UN PRODUCTO desde /products/{id}
 
     @PutMapping(
-            value = "/productos",
+            value = "/products",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Product> modificarProducto(
-            @RequestBody Product nuevoProduct
+    public ResponseEntity<Product> updateProduct(
+            @RequestBody Product newProduct
     ) {
-        return productoService.modificarProducto(nuevoProduct);
+        return productService.updateProduct(newProduct);
 
     }
 
-    //BORRAR UN PRODUCTO ESPECÍFICO desde /productos/{id}
+    //BORRAR UN PRODUCTO ESPECÍFICO desde /products/{id}
 
     @DeleteMapping(
-            value = "/productos/{id}"
+            value = "/products/{id}"
 
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Product>> bajaProducto(
+    public ResponseEntity<ArrayList<Product>> deleteProduct(
             @PathVariable(name = "id") String id
     ) {
-        return productoService.bajaProducto(id);
+        return productService.deleteProduct(id);
 
     }
     //FILTROS DE CONSULTA DE PRODUCTO SEGUN DISTINTOS ATRIBUTOS (usar stream lambda)

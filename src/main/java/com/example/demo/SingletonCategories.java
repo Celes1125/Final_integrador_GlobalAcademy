@@ -9,10 +9,10 @@ public class SingletonCategories {
     private ArrayList<User> users;
     private ArrayList<Product> products;
     private ArrayList<Client> clients;
-    private ArrayList<Vendedor> sellers;
-    private ArrayList<Venta> sales;
-    private ArrayList<saleDetail> details;
-    private HashMap<String, ArrayList<saleDetail>> allCarts;
+    private ArrayList<Seller> sellers;
+    private ArrayList<Sale> sales;
+    private ArrayList<SaleDetail> details;
+    private HashMap<String, ArrayList<SaleDetail>> allCarts;
 
     //constructor vacío pero con el atributo iniciado
     public SingletonCategories() {
@@ -50,19 +50,19 @@ public class SingletonCategories {
 
     public void setClientes(ArrayList<Client> clients) { this.clients = clients;}
 
-    public ArrayList<Vendedor> getSellers() { return sellers;}
+    public ArrayList<Seller> getSellers() { return sellers;}
 
-    public void setSellers(ArrayList<Vendedor> sellers) { this.sellers = sellers;}
+    public void setSellers(ArrayList<Seller> sellers) { this.sellers = sellers;}
 
-    public ArrayList<Venta> getSales() { return sales;}
+    public ArrayList<Sale> getSales() { return sales;}
 
-    public void setSales(ArrayList<Venta> sales) { this.sales = sales;}
+    public void setSales(ArrayList<Sale> sales) { this.sales = sales;}
 
-    public ArrayList<saleDetail> getDetails() { return details;}
+    public ArrayList<SaleDetail> getDetails() { return details;}
 
-    public void setDetails(ArrayList<saleDetail> details) { this.details = details;}
+    public void setDetails(ArrayList<SaleDetail> details) { this.details = details;}
 
-    public HashMap<String, ArrayList<saleDetail>> getAllCarts() { return allCarts;}
+    public HashMap<String, ArrayList<SaleDetail>> getAllCarts() { return allCarts;}
 
-    public void setAllCarts(HashMap<String, ArrayList<saleDetail>> allCarts) { this.allCarts = allCarts;}
+    public void setAllCarts(HashMap<String, ArrayList<SaleDetail>> allCarts) { this.allCarts = allCarts;}
 }

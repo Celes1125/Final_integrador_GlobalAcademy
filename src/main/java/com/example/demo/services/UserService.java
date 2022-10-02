@@ -13,19 +13,19 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @Service
-public class UsuarioService {
+public class UserService {
 
-    public ResponseEntity<ArrayList<User>> crearUsuario(User nuevoUser) {
+    public ResponseEntity<ArrayList<User>> createUser(User newUser) {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<User> users = cs.getUsers();
 
         User user = users.stream()
-                .filter(u -> Objects.equals(u.getUserId(), nuevoUser.getUserId()))
+                .filter(u -> Objects.equals(u.getUserId(), newUser.getUserId()))
                 .findFirst()
                 .orElse(null);
 
         if(user == null){
-            users.add(nuevoUser);
+            users.add(newUser);
             cs.setUsers(users);
             return new ResponseEntity<>(users, HttpStatus.OK);
         }else{
@@ -33,13 +33,13 @@ public class UsuarioService {
         }
     }
 
-    public ResponseEntity<ArrayList<User>> listarUsuarios() {
+    public ResponseEntity<ArrayList<User>> listUsers() {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<User> users = cs.getUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    public ResponseEntity<User> verUsuarioXId(long id) {
+    public ResponseEntity<User> getUserById(long id) {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<User> users = cs.getUsers();
         User user = users.stream()
@@ -54,7 +54,7 @@ public class UsuarioService {
         }
     }
 
-    public ResponseEntity<User> modificarUsuario(User nuevoUser) {
+    public ResponseEntity<User> updateUser(User nuevoUser) {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<User> users = cs.getUsers();
         User user = users.stream()
@@ -67,7 +67,7 @@ public class UsuarioService {
             user.setSurname(nuevoUser.getSurname());
             user.setPassword(nuevoUser.getPassword());
             user.setBirthDate(nuevoUser.getBirthDate());
-            user.setTipo_usuario(nuevoUser.getTipo_usuario());
+            user.setUserType(nuevoUser.getUserType());
             user.setEmail(nuevoUser.getEmail());
             return new ResponseEntity<>(user, HttpStatus.OK);
         }else{
@@ -76,7 +76,7 @@ public class UsuarioService {
 
     }
 
-    public ResponseEntity<ArrayList<User>> eliminarUsuario(long id) {
+    public ResponseEntity<ArrayList<User>> deleteUser(String id) {
 
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<User> users = cs.getUsers();

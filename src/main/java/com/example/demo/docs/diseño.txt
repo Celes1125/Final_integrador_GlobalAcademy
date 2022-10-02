@@ -20,7 +20,7 @@ verUsuarioXId()
 }
 Class Vendedor{
 -idVendedor
--ventas
+-sales
 
 }
 Class Venta{

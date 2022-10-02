@@ -9,27 +9,27 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @Service
-public class ProductoService {
+public class ProductService {
 
-    public ResponseEntity<ArrayList<Product>> crearProducto(Product nuevoProduct) {
+    public ResponseEntity<ArrayList<Product>> createProduct(Product newProduct) {
 
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Product> products = cs.getProductos();
         //le saqué el chequeo por id porque no le veo el sentido luego de que el id se genere por UUID...
-        Product product = new Product(nuevoProduct.getName(), nuevoProduct.getPrice(), nuevoProduct.getCategory(), nuevoProduct.getSeller(), nuevoProduct.getStock());
+        Product product = new Product(newProduct.getName(), newProduct.getPrice(), newProduct.getCategory(), newProduct.getSeller(), newProduct.getStock());
         products.add(product);
         cs.setProductos(products);
         return new ResponseEntity<>(products, HttpStatus.OK);
 
     }
 
-    public ResponseEntity<ArrayList<Product>> listarProductos() {
+    public ResponseEntity<ArrayList<Product>> listProducts() {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Product> products = cs.getProductos();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    public ResponseEntity<Product> verProductoXId(String id) {
+    public ResponseEntity<Product> getProductById(String id) {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Product> products = cs.getProductos();
         Product product = products.stream()
@@ -44,27 +44,27 @@ public class ProductoService {
         }
     }
 
-    public ResponseEntity<Product> modificarProducto(Product nuevoProduct) {
+    public ResponseEntity<Product> updateProduct(Product newProduct) {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Product> products = cs.getProductos();
         Product product = products.stream()
-                .filter(p -> Objects.equals(p.getProductId(), nuevoProduct.getProductId()))
+                .filter(p -> Objects.equals(p.getProductId(), newProduct.getProductId()))
                 .findFirst()
                 .orElse(null);
 
         if(product != null){
-            product.setName(nuevoProduct.getName());
-            product.setPrice(nuevoProduct.getPrice());
-            product.setCategory(nuevoProduct.getCategory());
-            product.setStock(nuevoProduct.getStock());
-            return new ResponseEntity<>(nuevoProduct, HttpStatus.OK);
+            product.setName(newProduct.getName());
+            product.setPrice(newProduct.getPrice());
+            product.setCategory(newProduct.getCategory());
+            product.setStock(newProduct.getStock());
+            return new ResponseEntity<>(newProduct, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }
 
-    public ResponseEntity<ArrayList<Product>> bajaProducto(String id) {
+    public ResponseEntity<ArrayList<Product>> deleteProduct(String id) {
 
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Product> products = cs.getProductos();

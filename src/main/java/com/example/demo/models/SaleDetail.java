@@ -1,17 +1,17 @@
 package com.example.demo.models;
 import java.util.UUID;
 
-public class saleDetail {
+public class SaleDetail {
     private final String saleDetailId;
     private Product product;
-    private int units;
+    private int quantity;
     private double amount;
 
-    public saleDetail(Product product, int units) {
+    public SaleDetail(Product product, int quantity) {
         this.saleDetailId = UUID.randomUUID().toString();
         this.product = product;
-        this.units = units;
-        this.amount = units * product.getPrice();
+        this.quantity = quantity;
+        this.amount = quantity * product.getPrice();
     }
 
     public String getSaleDetailId() {
@@ -23,11 +23,11 @@ public class saleDetail {
     public void setProduct(Product product) {
         this.product = product;
     }
-    public int getUnits() {
-        return units;
+    public int getQuantity() {
+        return quantity;
     }
-    public void setUnits(int units) {
-        this.units = units;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
     public double getAmount() {
         return amount;
@@ -42,7 +42,7 @@ public class saleDetail {
         return "saleDetail{" +
                 "saleDetailId='" + saleDetailId + '\'' +
                 ", product=" + product +
-                ", units=" + units +
+                ", units=" + quantity +
                 ", amount=" + amount +
                 '}';
     }

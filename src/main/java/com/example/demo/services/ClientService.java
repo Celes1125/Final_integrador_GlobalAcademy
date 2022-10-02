@@ -7,18 +7,18 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Objects;
 @Service
-public class ClienteService {
-    public ResponseEntity<ArrayList<Client>> crearCliente(Client nuevoClient) {
+public class ClientService {
+    public ResponseEntity<ArrayList<Client>> createClient(Client newClient) {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Client> clients = cs.getClientes();
 
         Client client = clients.stream()
-                .filter(c -> Objects.equals(c.getClientId(), nuevoClient.getClientId()))
+                .filter(c -> Objects.equals(c.getClientId(), newClient.getClientId()))
                 .findFirst()
                 .orElse(null);
 
         if(client == null){
-            clients.add(nuevoClient);
+            clients.add(newClient);
             cs.setClientes(clients);
             return new ResponseEntity<>(clients, HttpStatus.OK);
         }else{
@@ -26,13 +26,13 @@ public class ClienteService {
         }
     }
 
-    public ResponseEntity<ArrayList<Client>> listarClientes() {
+    public ResponseEntity<ArrayList<Client>> listCLients() {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Client> clients = cs.getClientes();
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
-    public ResponseEntity<Client> verClienteXId(String id) {
+    public ResponseEntity<Client> getClientById(String id) {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Client> clients = cs.getClientes();
         Client client = clients.stream()
@@ -47,29 +47,29 @@ public class ClienteService {
         }
     }
 
-    public ResponseEntity<Client> modificarCliente(Client nuevoClient) {
+    public ResponseEntity<Client> updateClient(Client newClient) {
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Client> clients = cs.getClientes();
         Client client = clients.stream()
-                .filter(c -> Objects.equals(c.getClientId(), nuevoClient.getClientId()))
+                .filter(c -> Objects.equals(c.getClientId(), newClient.getClientId()))
                 .findFirst()
                 .orElse(null);
 
         if(client != null){
-            client.setName(nuevoClient.getName());
-            client.setSurname(nuevoClient.getSurname());
-            client.setPassword(nuevoClient.getPassword());
-            client.setBirthDate(nuevoClient.getBirthDate());
-            client.setTipo_usuario(nuevoClient.getTipo_usuario());
-            client.setEmail(nuevoClient.getEmail());
-            return new ResponseEntity<>(nuevoClient, HttpStatus.OK);
+            client.setName(newClient.getName());
+            client.setSurname(newClient.getSurname());
+            client.setPassword(newClient.getPassword());
+            client.setBirthDate(newClient.getBirthDate());
+            client.setUserType(newClient.getUserType());
+            client.setEmail(newClient.getEmail());
+            return new ResponseEntity<>(newClient, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }
 
-    public ResponseEntity<ArrayList<Client>> eliminarCliente(String id) {
+    public ResponseEntity<ArrayList<Client>> deleteClient(String id) {
 
         SingletonCategories cs = SingletonCategories.getInstance();
         ArrayList<Client> clients = cs.getClientes();

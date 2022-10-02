@@ -25,17 +25,14 @@ public abstract class User {
         this.password = password;
         this.email = email;
     }
-
-
-    public User(String name, String surname, String password, String fecha_nacimiento, String tipo_usuario, String email) {
+    public User(String name, String surname, String password, String birthDate, String userType, String email) {
         this.userId = UUID.randomUUID().toString();
         this.name = name;
         this.surname = surname;
         this.password = password;
-        this.birthDate = fecha_nacimiento;
-        this.userType = tipo_usuario;
+        this.birthDate = birthDate;
+        this.userType = userType;
         this.email = email;
-
     }
 
     public String getUserId() {
@@ -78,12 +75,12 @@ public abstract class User {
         this.birthDate = birthDate;
     }
 
-    public String getTipo_usuario() {
+    public String getUserType() {
         return userType;
     }
 
-    public void setTipo_usuario(String tipo_usuario) {
-        this.userType = tipo_usuario;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getEmail() {
