@@ -19,12 +19,12 @@ public class SaleDetailController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity <ArrayList<SaleDetail>> sumarAlCarrito (
+    public ResponseEntity <ArrayList<SaleDetail>> addToCart(
             @RequestHeader (value="password") String password,
             @RequestHeader (value="email") String email,
-            @RequestParam (name="idProducto") String idProducto,
-            @RequestParam (name="cantidad") int cantidad
+            @RequestParam (name="productId") String ProductId,
+            @RequestParam (name="quantity") int quantity
     ){
-        return saleDetailService.sumarAlCarrito(password, email, idProducto, cantidad);
+        return SaleDetailService.addToCart(password, email, ProductId, quantity);
     }
 }

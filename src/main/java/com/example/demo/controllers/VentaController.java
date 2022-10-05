@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Sale;
-import com.example.demo.services.SailService;
+import com.example.demo.services.SaleService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 @RestController
 public class VentaController {
-    private final SailService sailService;
+    private final SaleService saleService;
 
-    public VentaController(SailService sailService) {
-        this.sailService = sailService;
+    public VentaController(SaleService saleService) {
+        this.saleService = saleService;
     }
     @PostMapping(
             value="/ventas",
@@ -26,7 +26,7 @@ public class VentaController {
 
 
     ){
-        return sailService.createSale(password, email);
+        return saleService.createSale(password, email);
     }
 
     @GetMapping (
@@ -35,7 +35,7 @@ public class VentaController {
     )
     @ResponseBody
     public ResponseEntity<ArrayList<Sale>> listarVentas (){
-        return SailService.listarVentas();
+        return SaleService.listarVentas();
     }
 
     //crud...vender, cancelar, despachar????

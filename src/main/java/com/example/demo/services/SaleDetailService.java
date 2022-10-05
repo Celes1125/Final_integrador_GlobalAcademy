@@ -1,4 +1,5 @@
 package com.example.demo.services;
+import com.example.demo.SingletonCategories;
 import com.example.demo.models.Client;
 import com.example.demo.models.SaleDetail;
 import com.example.demo.models.Product;
@@ -10,14 +11,14 @@ import java.util.ArrayList;
 
 @Service
 public class SaleDetailService {
-    public static ResponseEntity <ArrayList<SaleDetail>> sumarAlCarrito(String password, String email, String idProducto, int cantidad) {
-        Client client = Client.ChecarCliente(password, email);
-        Product product = Product.CheckProduct(idProducto, cantidad);
+    public static ResponseEntity <ArrayList<SaleDetail>> addToCart (String password, String email, String productId, int quantity) {
+        Client client = Client.CheckClient(password, email);
+        Product product = Product.CheckProduct(productId, quantity);
         if(client !=null && product !=null){//ACÁ DESPUÉS VER DE USAR MEJOR UN SWITCH CASE U OTRA COSA PARA QUE DEVUELVA BIEN EL ERROR...
-            SaleDetail saleDetail = new SaleDetail(product, cantidad);
-            Client.SumarAlCarrito(saleDetail);
+            SaleDetail saleDetail = new SaleDetail(client.getClientId(), product, quantity);
 
-            return new ResponseEntity<>(client.getCarrito(), HttpStatus.OK);
+
+            return new ResponseEntity<>(client.getClientCart(), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

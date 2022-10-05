@@ -10,7 +10,7 @@ import java.util.Objects;
 public class ClientService {
     public ResponseEntity<ArrayList<Client>> createClient(Client newClient) {
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Client> clients = cs.getClientes();
+        ArrayList<Client> clients = cs.getClients();
 
         Client client = clients.stream()
                 .filter(c -> Objects.equals(c.getClientId(), newClient.getClientId()))
@@ -19,7 +19,7 @@ public class ClientService {
 
         if(client == null){
             clients.add(newClient);
-            cs.setClientes(clients);
+            cs.setClients(clients);
             return new ResponseEntity<>(clients, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -28,13 +28,13 @@ public class ClientService {
 
     public ResponseEntity<ArrayList<Client>> listCLients() {
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Client> clients = cs.getClientes();
+        ArrayList<Client> clients = cs.getClients();
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
     public ResponseEntity<Client> getClientById(String id) {
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Client> clients = cs.getClientes();
+        ArrayList<Client> clients = cs.getClients();
         Client client = clients.stream()
                 .filter(c -> Objects.equals(c.getClientId(), id))
                 .findFirst()
@@ -49,7 +49,7 @@ public class ClientService {
 
     public ResponseEntity<Client> updateClient(Client newClient) {
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Client> clients = cs.getClientes();
+        ArrayList<Client> clients = cs.getClients();
         Client client = clients.stream()
                 .filter(c -> Objects.equals(c.getClientId(), newClient.getClientId()))
                 .findFirst()
@@ -72,7 +72,7 @@ public class ClientService {
     public ResponseEntity<ArrayList<Client>> deleteClient(String id) {
 
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Client> clients = cs.getClientes();
+        ArrayList<Client> clients = cs.getClients();
 
         Client client = clients.stream()
                 .filter(c -> Objects.equals(c.getClientId(), id))
@@ -81,7 +81,7 @@ public class ClientService {
 
         if(client != null){
             clients.remove(client);
-            cs.setClientes(clients);
+            cs.setClients(clients);
             return new ResponseEntity<>(clients, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

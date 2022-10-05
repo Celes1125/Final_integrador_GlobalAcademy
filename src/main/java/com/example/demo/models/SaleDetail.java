@@ -3,20 +3,25 @@ import java.util.UUID;
 
 public class SaleDetail {
     private final String saleDetailId;
+
+    private final String clientId;
     private Product product;
     private int quantity;
     private double amount;
 
-    public SaleDetail(Product product, int quantity) {
+    public SaleDetail(String clientId, Product product, int quantity) {
         this.saleDetailId = UUID.randomUUID().toString();
+        this.clientId = clientId;
         this.product = product;
         this.quantity = quantity;
         this.amount = quantity * product.getPrice();
+
     }
 
     public String getSaleDetailId() {
         return saleDetailId;
     }
+    public String getClientId() { return  clientId;}
     public Product getProduct() {
         return product;
     }
@@ -39,10 +44,11 @@ public class SaleDetail {
 
     @Override
     public String toString() {
-        return "saleDetail{" +
+        return "SaleDetail{" +
                 "saleDetailId='" + saleDetailId + '\'' +
+                ", clientId='" + clientId + '\'' +
                 ", product=" + product +
-                ", units=" + quantity +
+                ", quantity=" + quantity +
                 ", amount=" + amount +
                 '}';
     }

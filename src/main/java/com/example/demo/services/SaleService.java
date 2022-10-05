@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 @Service
-public class SailService {
+public class SaleService {
 
 
     public static ResponseEntity<ArrayList<Sale>> listarVentas() {
@@ -21,7 +21,7 @@ public class SailService {
     }
 
     public ResponseEntity<Sale> createSale(String password, String email) {
-        Client client = Client.ChecarCliente(password, email);
+        Client client = Client.CheckClient(password, email);
         if(client !=null){
             SingletonCategories cs = SingletonCategories.getInstance();
             ArrayList<Sale> sales = cs.getSales();

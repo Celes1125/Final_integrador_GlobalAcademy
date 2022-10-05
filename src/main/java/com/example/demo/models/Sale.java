@@ -31,7 +31,7 @@ public class Sale {
     }
 
     private void recalculateStock() {
-        ArrayList<SaleDetail> carrito = client.getCarrito();
+        ArrayList<SaleDetail> carrito = client.getClientCart();
         carrito.stream().forEach(d -> {
             Product.CheckProduct(d.getProduct().getProductId(), d.getQuantity());
         });
@@ -39,9 +39,8 @@ public class Sale {
     }
 
     private void calculateTotal() {
-        Double total=0d;
-        total= this.client.getCarrito().stream()
-                .mapToDouble(detalleVenta -> detalleVenta.getMonto())
+        Double total= this.client.getClientCart().stream()
+                .mapToDouble(detalleVenta -> detalleVenta.getAmount())
                 .sum();
         this.totalPrice = total;
     }

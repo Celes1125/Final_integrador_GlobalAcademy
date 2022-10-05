@@ -14,24 +14,24 @@ public class ProductService {
     public ResponseEntity<ArrayList<Product>> createProduct(Product newProduct) {
 
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Product> products = cs.getProductos();
+        ArrayList<Product> products = cs.getProducts();
         //le saqué el chequeo por id porque no le veo el sentido luego de que el id se genere por UUID...
         Product product = new Product(newProduct.getName(), newProduct.getPrice(), newProduct.getCategory(), newProduct.getSeller(), newProduct.getStock());
         products.add(product);
-        cs.setProductos(products);
+        cs.setProducts(products);
         return new ResponseEntity<>(products, HttpStatus.OK);
 
     }
 
     public ResponseEntity<ArrayList<Product>> listProducts() {
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Product> products = cs.getProductos();
+        ArrayList<Product> products = cs.getProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     public ResponseEntity<Product> getProductById(String id) {
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Product> products = cs.getProductos();
+        ArrayList<Product> products = cs.getProducts();
         Product product = products.stream()
                 .filter(p -> Objects.equals(p.getProductId(), id))
                 .findFirst()
@@ -46,7 +46,7 @@ public class ProductService {
 
     public ResponseEntity<Product> updateProduct(Product newProduct) {
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Product> products = cs.getProductos();
+        ArrayList<Product> products = cs.getProducts();
         Product product = products.stream()
                 .filter(p -> Objects.equals(p.getProductId(), newProduct.getProductId()))
                 .findFirst()
@@ -67,7 +67,7 @@ public class ProductService {
     public ResponseEntity<ArrayList<Product>> deleteProduct(String id) {
 
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Product> products = cs.getProductos();
+        ArrayList<Product> products = cs.getProducts();
 
         Product product = products.stream()
                 .filter(p -> Objects.equals(p.getProductId(), id))
@@ -76,7 +76,7 @@ public class ProductService {
 
         if(product != null){
             products.remove(product);
-            cs.setProductos(products);
+            cs.setProducts(products);
             return new ResponseEntity<>(products, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

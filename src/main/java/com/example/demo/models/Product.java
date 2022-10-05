@@ -77,12 +77,12 @@ public class Product {
 
 
 
-    public static Product CheckProduct(String productId, int units) {
+    public static Product CheckProduct(String productId, int quantity) {
         SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Product> products = cs.getProductos();
+        ArrayList<Product> products = cs.getProducts();
         return products.stream()
                 .filter(p -> Objects.equals(p.getProductId(), productId))
-                .filter(p -> p.getStock() >= units)
+                .filter(p -> p.getStock() >= quantity)
                 .findFirst()
                 .orElse(null);
 
