@@ -11,16 +11,8 @@ public class Client extends User {
     public Client(String name, String surname, String password, String birthDate, String userType, String email) {
         super(name, surname, password, birthDate, userType, email);
         this.clientId = UUID.randomUUID().toString();
-        showClientCart();
-    }
+        this.clientCart = new ArrayList<>();
 
-    private Object[] showClientCart() {
-        SingletonCategories sc = SingletonCategories.getInstance();
-        ArrayList<SaleDetail> details = sc.getDetails();
-        Object[] cart = details.stream()
-                .filter(detail -> Objects.equals(detail.getClientId(),this.clientId))
-                .toArray();
-        return cart;
     }
 
 
@@ -52,7 +44,9 @@ public class Client extends User {
         return clientCart;
     }
 
-
+    public void setClientCart(ArrayList<SaleDetail> clientCart) {
+        this.clientCart = clientCart;
+    }
     @Override
     public String toString() {
         return "Client{" +
@@ -60,4 +54,6 @@ public class Client extends User {
                 ", clientCart=" + clientCart +
                 '}';
     }
+
+
 }
