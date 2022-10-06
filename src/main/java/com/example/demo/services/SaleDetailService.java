@@ -15,9 +15,11 @@ public class SaleDetailService {
         Client client = Client.CheckClient(password, email);
         Product product = Product.CheckProduct(productId, quantity);
         if(client !=null && product !=null){//ACÁ DESPUÉS VER DE USAR MEJOR UN SWITCH CASE U OTRA COSA PARA QUE DEVUELVA BIEN EL ERROR...
-            SaleDetail saleDetail = new SaleDetail(client.getClientId(), product, quantity);
-
-
+            SaleDetail newDetail = new SaleDetail(client.getClientId(), product, quantity);
+            SingletonCategories sc = SingletonCategories.getInstance();
+            ArrayList <SaleDetail> details = sc.getDetails();
+            details.add(newDetail);
+            sc.setDetails(details);
             return new ResponseEntity<>(client.getClientCart(), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
