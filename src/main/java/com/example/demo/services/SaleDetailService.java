@@ -20,6 +20,8 @@ public class SaleDetailService {
             ArrayList <SaleDetail> details = sc.getDetails();
             details.add(newDetail);
             sc.setDetails(details);
+            sc.getClients();
+
             return new ResponseEntity<>(client.getClientCart(), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

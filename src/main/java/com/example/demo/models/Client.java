@@ -41,6 +41,8 @@ public class Client extends User {
     }
 
     public ArrayList<SaleDetail> getClientCart() {
+        SingletonCategories sc = SingletonCategories.getInstance();
+        sc.getClients();
         return clientCart;
     }
 

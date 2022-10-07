@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-public class VentaController {
+public class SaleController {
     private final SaleService saleService;
 
-    public VentaController(SaleService saleService) {
+    public SaleController(SaleService saleService) {
         this.saleService = saleService;
     }
     @PostMapping(
-            value="/ventas",
+            value="/sales",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Sale> generarVenta (
+    public ResponseEntity<Sale> createSale(
             @RequestHeader (value="password") String password,
             @RequestHeader (value="email") String email
 
@@ -30,12 +30,12 @@ public class VentaController {
     }
 
     @GetMapping (
-            value="/ventas",
+            value="/sales",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Sale>> listarVentas (){
-        return SaleService.listarVentas();
+    public ResponseEntity<ArrayList<Sale>> getAllSales(){
+        return SaleService.getAllSales();
     }
 
     //crud...vender, cancelar, despachar????

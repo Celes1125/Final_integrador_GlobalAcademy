@@ -16,6 +16,7 @@ public class Sale {
 
     public Sale(Client client) {
         this.client = client;
+        this.cart = client.getClientCart();
     }
 
     public void makeSale() {
@@ -23,16 +24,16 @@ public class Sale {
         this.saleDate = new Date();
         estimatedDelivery(saleDate);
         this.deliveryDate = null;
-        this.cart = client.getClientCart();
         calculateTotal();
         recalculateStock();
-        client.cleanCart();
+
 
     }
 
     private void recalculateStock() {
-        ArrayList<SaleDetail> carrito = client.getClientCart();
-        carrito.stream().forEach(d -> {
+        ArrayList<SaleDetail> cart = client.getClientCart();
+        cart.stream().forEach(
+                d -> {
             Product.CheckProduct(d.getProduct().getProductId(), d.getQuantity());
         });
 
@@ -40,13 +41,13 @@ public class Sale {
 
     private void calculateTotal() {
         Double total= this.client.getClientCart().stream()
-                .mapToDouble(detalleVenta -> detalleVenta.getAmount())
+                .mapToDouble(sailDetail -> sailDetail.getAmount())
                 .sum();
         this.totalPrice = total;
     }
-    private void estimatedDelivery(Date fechaDeVenta) {
+    private void estimatedDelivery(Date saleDate) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fechaDeVenta);
+        calendar.setTime(saleDate);
         calendar.add(Calendar.DAY_OF_YEAR, 10);
         this.estimatedDeliveryDate = calendar.getTime();
     }

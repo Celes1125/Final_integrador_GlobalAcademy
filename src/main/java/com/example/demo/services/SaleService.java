@@ -13,22 +13,21 @@ import java.util.ArrayList;
 public class SaleService {
 
 
-    public static ResponseEntity<ArrayList<Sale>> listarVentas() {
-        SingletonCategories cs = SingletonCategories.getInstance();
-        ArrayList<Sale> sales = cs.getSales();
-
+    public static ResponseEntity<ArrayList<Sale>> getAllSales() {
+        SingletonCategories sc = SingletonCategories.getInstance();
+        ArrayList<Sale> sales = sc.getSales();
         return new ResponseEntity<>(sales, HttpStatus.OK);
     }
 
     public ResponseEntity<Sale> createSale(String password, String email) {
         Client client = Client.CheckClient(password, email);
         if(client !=null){
-            SingletonCategories cs = SingletonCategories.getInstance();
-            ArrayList<Sale> sales = cs.getSales();
+            SingletonCategories sc = SingletonCategories.getInstance();
+            ArrayList<Sale> sales = sc.getSales();
             Sale sale = new Sale(client);
             sale.makeSale();
             sales.add(sale);
-            cs.setSales(sales);
+            sc.setSales(sales);
             return new ResponseEntity<>(sale, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
