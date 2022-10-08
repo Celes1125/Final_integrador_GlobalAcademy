@@ -16,7 +16,8 @@ public class Sale {
 
     public Sale(Client client) {
         this.client = client;
-        this.cart = client.getClientCart();
+
+
     }
 
     public void makeSale() {
@@ -24,10 +25,9 @@ public class Sale {
         this.saleDate = new Date();
         estimatedDelivery(saleDate);
         this.deliveryDate = null;
+        this.cart = client.getClientCart();
         calculateTotal();
         recalculateStock();
-
-
     }
 
     private void recalculateStock() {
@@ -100,7 +100,13 @@ public class Sale {
         this.totalPrice = totalPrice;
     }
 
+    public ArrayList<SaleDetail> getCart() {
+        return cart;
+    }
 
+    public void setCart(ArrayList<SaleDetail> cart) {
+        this.cart = cart;
+    }
     @Override
     public String toString() {
         return "Sale{" +
