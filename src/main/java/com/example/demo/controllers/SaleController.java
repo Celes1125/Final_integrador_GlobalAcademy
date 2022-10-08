@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Venta;
-import com.example.demo.services.VentaService;
+import com.example.demo.models.Sale;
+import com.example.demo.services.SaleService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,33 +9,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-public class VentaController {
-    private final VentaService ventaService;
+public class SaleController {
+    private final SaleService saleService;
 
-    public VentaController(VentaService ventaService) {
-        this.ventaService = ventaService;
+    public SaleController(SaleService saleService) {
+        this.saleService = saleService;
     }
     @PostMapping(
-            value="/ventas",
+            value="/sales",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<Venta> generarVenta (
+    public ResponseEntity<Sale> createSale(
             @RequestHeader (value="password") String password,
             @RequestHeader (value="email") String email
 
 
     ){
-        return ventaService.generarVenta(password, email);
+        return saleService.createSale(password, email);
     }
 
     @GetMapping (
-            value="/ventas",
+            value="/sales",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ArrayList<Venta>> listarVentas (){
-        return VentaService.listarVentas();
+    public ResponseEntity<ArrayList<Sale>> getAllSales(){
+        return SaleService.getAllSales();
     }
 
     //crud...vender, cancelar, despachar????
