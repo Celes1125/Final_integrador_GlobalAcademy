@@ -1,4 +1,6 @@
 package com.example.demo.models;
+import com.example.demo.SingletonCategories;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,14 +32,19 @@ public class Sale {
         recalculateStock();
     }
 
+
     private void recalculateStock() {
         ArrayList<SaleDetail> cart = client.getClientCart();
         cart.stream().forEach(
                 d -> {
             Product.CheckProduct(d.getProduct().getProductId(), d.getQuantity());
+            if(d != null){
+                d.getProduct().setStock(d.getProduct().getStock()- d.getQuantity());
+            }
         });
 
     }
+
 
     private void calculateTotal() {
         Double total= this.client.getClientCart().stream()
