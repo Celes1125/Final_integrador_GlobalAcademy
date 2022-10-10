@@ -84,6 +84,18 @@ public class UserController {
     }
 
     //ver usuarios activos
+
+     @GetMapping(
+             value = "/login"
+     )
+    @ResponseBody
+    public ResponseEntity<String>  login(
+            @RequestHeader(value = "username") String username,
+            @RequestHeader(value = "password") String password
+     ){
+        return userService.checkLogin(username,password);
+
+     }
     //filtrar por cliente/vendedor/admin...
     //eliminación lógica del usuario
     //

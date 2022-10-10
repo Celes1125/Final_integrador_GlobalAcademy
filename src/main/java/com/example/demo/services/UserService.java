@@ -97,9 +97,29 @@ public class UserService {
 
 
 
-
-
-
-
     }
+
+    public ResponseEntity<String> checkLogin(String email, String password) {
+       SingletonCategories cs = SingletonCategories.getInstance();
+       ArrayList<User> users = cs.getUsers();
+       User userFound = users.stream()
+               .filter(u -> Objects.equals(u.getEmail(), email))
+               .findFirst()
+               .orElse(null );
+        if(userFound == null){
+            return new ResponseEntity<>("User Not Found!",HttpStatus.NOT_FOUND);
+    }else if(!Objects.equals(userFound.getPassword(), password)){
+            userFound.incrementFailedLogin();
+            cs.setUsers(users);
+            if(userFound.isActive()){
+                return new ResponseEntity<>("Password don't match!",HttpStatus.UNAUTHORIZED);
+            }else {
+                return new ResponseEntity<>("Password don't match! User "+ email+"was blocked due to too many failed attempts! Please contact us through info@Help.com",
+                        HttpStatus.FORBIDDEN
+                );
+            }
+    }else{
+            return new ResponseEntity<>("Logged in!",HttpStatus.OK);
+    }
+}
 }

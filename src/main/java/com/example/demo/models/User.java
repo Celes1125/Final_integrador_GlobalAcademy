@@ -4,12 +4,14 @@ import java.util.UUID;
 
 public abstract class User {
     private String userId;
+    private byte retries =0;
     private String name;
     private String surname;
     private String password;
     private String birthDate;
     private String userType;
     private String email;
+    private boolean isActive = true ;
 
 
 
@@ -91,6 +93,22 @@ public abstract class User {
         this.email = email;
     }
 
+    public void incrementFailedLogin(){
+        this.retries++;
+        if(this.retries>3){
+            this.blockUser();
+        }
+    }
+    public void resetRetries(){
+        this.retries=0;
+    }
+    public void blockUser(){
+        this.isActive = false;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
 
     @Override
     public String toString() {
