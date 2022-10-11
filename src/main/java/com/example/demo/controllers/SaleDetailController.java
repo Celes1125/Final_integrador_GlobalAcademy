@@ -27,4 +27,47 @@ public class SaleDetailController {
     ){
         return SaleDetailService.addToCart(password, email, ProductId, quantity);
     }
+
+
+    @DeleteMapping(
+            value="/details",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity <ArrayList<SaleDetail>> removeFromCart(
+            @RequestHeader (value="password") String password,
+            @RequestHeader (value="email") String email,
+            @RequestParam (name="productId") String ProductId
+
+    ){
+        return SaleDetailService.removeFromCart(password, email, ProductId);
+    }
+
+    @GetMapping (
+            value="/details",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity <ArrayList<SaleDetail>> getClientCart(
+            @RequestHeader (value="password") String password,
+            @RequestHeader (value="email") String email
+
+    ){
+        return SaleDetailService.getClientCart(password, email);
+    }
+
+    @DeleteMapping(
+            value="/cleanCart",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity <ArrayList<SaleDetail>> clearCart(
+            @RequestHeader (value="password") String password,
+            @RequestHeader (value="email") String email
+
+
+    ){
+        return SaleDetailService.clearCart(password, email);
+    }
+
 }

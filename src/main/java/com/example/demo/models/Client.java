@@ -17,8 +17,16 @@ public class Client extends User {
 
 
 
-    public void cleanCart(){
-        this.clientCart=new ArrayList<>();
+    public void cleanCart(Client client){
+        SingletonCategories sc = SingletonCategories.getInstance();
+        ArrayList<SaleDetail> details = sc.getDetails();
+         details.forEach(saleDetail -> {
+            saleDetail.getClientId().equals(client.getClientId());
+            details.remove(saleDetail);
+            sc.setDetails(details);
+        });
+
+        client.setClientCart(this.clientCart = new ArrayList<>());
     }
     public static Client CheckClient(String password, String email) {
         SingletonCategories cs = SingletonCategories.getInstance();
