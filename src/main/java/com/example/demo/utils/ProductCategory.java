@@ -1,6 +1,6 @@
 package com.example.demo.utils;
 
-public enum CategoriaDeProductos {
+public enum ProductCategory {
     VEHICULOS,
     INMUEBLES,
     SUPERMERCADO,

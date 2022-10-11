@@ -67,7 +67,7 @@ public class SaleDetailController {
 
 
     ){
-        return SaleDetailService.cleanCart(password, email);
+        return SaleDetailService.clearCart(password, email);
     }
 
 }

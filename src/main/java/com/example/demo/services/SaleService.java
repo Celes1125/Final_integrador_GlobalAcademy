@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 @Service
@@ -24,14 +25,45 @@ public class SaleService {
         if(client !=null){
             SingletonCategories sc = SingletonCategories.getInstance();
             ArrayList<Sale> sales = sc.getSales();
-            Sale sale = new Sale(client);
-            sale.makeSale();
-            sales.add(sale);
+            Sale order = new Sale(client);
+            order.makeOrder(order.getSaleId());
+            sales.add(order);
             sc.setSales(sales);
-            return new ResponseEntity<>(sale, HttpStatus.OK);
+            return new ResponseEntity<>(order, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
+    public ResponseEntity<Sale> confirmSale(String saleId) {
+        Sale sale;
+        sale = this.getSaleById(saleId).getBody();
+        if(sale !=null){
+            sale.setStatus("confirm");
+            Sale.RefreshStock(sale);
+            Sale.SendToDeliverySystem(sale);
+            SingletonCategories sc = SingletonCategories.getInstance();
+            ArrayList <Sale> sales = sc.getSales();
+            sc.setSales(sales);
+            return new ResponseEntity<>(sale, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    public ResponseEntity<Sale> getSaleById(String id) {
+        SingletonCategories cs = SingletonCategories.getInstance();
+        ArrayList<Sale> sales = cs.getSales();
+        Sale sale = sales.stream()
+                .filter(s -> Objects.equals(s.getSaleId(), id))
+                .findFirst()
+                .orElse(null);
+
+        if(sale != null){
+            return new ResponseEntity<>(sale, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

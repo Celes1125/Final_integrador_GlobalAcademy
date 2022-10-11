@@ -35,8 +35,32 @@ public class SaleController {
     )
     @ResponseBody
     public ResponseEntity<ArrayList<Sale>> getAllSales(){
-        return SaleService.getAllSales();
+        return saleService.getAllSales();
     }
+
+
+    @PostMapping (
+            value="/sales/confirm",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<Sale> confirmSale(
+            @RequestHeader (value="saleId") String saleId
+    ){
+        return saleService.confirmSale(saleId);
+    }
+
+    @GetMapping (
+            value="/sales/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<Sale> getSaleById(
+            @PathVariable(name = "id") String id
+    ){
+        return saleService.getSaleById(id);
+    }
+
 
     //crud...vender, cancelar, despachar????
     //ver ventas por fecha

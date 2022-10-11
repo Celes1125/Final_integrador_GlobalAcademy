@@ -1,14 +1,12 @@
 package com.example.demo.services;
 import com.example.demo.SingletonCategories;
 import com.example.demo.models.Client;
-import com.example.demo.models.Sale;
 import com.example.demo.models.SaleDetail;
 import com.example.demo.models.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -34,13 +32,11 @@ public class SaleDetailService {
 
     public static ResponseEntity<ArrayList<SaleDetail>> removeFromCart(String password, String email, String productId) {
         Client client = Client.CheckClient(password, email);
-
-
         SaleDetail detailToRemove = client.getClientCart().stream()
                 .filter(saleDetail -> Objects.equals(saleDetail.getProduct().getProductId(), productId))
                 .findFirst()
+                //.allMatch(saleDetail ->saleDetail.getProduct().getProductId(), productId)
                 .orElse(null);
-        client.getClientCart().remove(detailToRemove);
         SingletonCategories sc = SingletonCategories.getInstance();
         ArrayList <SaleDetail> details = sc.getDetails();
         details.remove(detailToRemove);
@@ -55,7 +51,7 @@ public class SaleDetailService {
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
-    public static ResponseEntity<ArrayList<SaleDetail>> cleanCart(String password, String email) {
+    public static ResponseEntity<ArrayList<SaleDetail>> clearCart(String password, String email) {
         Client client = Client.CheckClient(password, email);
         client.cleanCart(client);
         return new ResponseEntity<>(client.getClientCart(), HttpStatus.OK);
