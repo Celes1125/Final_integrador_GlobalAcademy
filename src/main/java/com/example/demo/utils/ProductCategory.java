@@ -4,7 +4,7 @@ public enum ProductCategory {
     VEHICULOS,
     INMUEBLES,
     SUPERMERCADO,
-    TECNOLOGÍA,
+    TECNOLOGIA,
     HOGAR_Y_MUEBLES,
     ELECTRODOMESTICOS,
     HERRAMIENTAS,

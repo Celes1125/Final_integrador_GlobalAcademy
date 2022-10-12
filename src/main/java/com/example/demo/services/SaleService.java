@@ -2,6 +2,7 @@ package com.example.demo.services;
 import com.example.demo.SingletonCategories;
 import com.example.demo.models.Client;
 import com.example.demo.models.Sale;
+import com.example.demo.utils.SaleStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class SaleService {
         Sale sale;
         sale = this.getSaleById(saleId).getBody();
         if(sale !=null){
-            sale.setStatus("confirm");
+            sale.setStatus(SaleStatus.CONFIRMED);
             Sale.RefreshStock(sale);
             Sale.SendToDeliverySystem(sale);
             SingletonCategories sc = SingletonCategories.getInstance();
@@ -76,7 +77,7 @@ public class SaleService {
         if(sale !=null){
             SingletonCategories sc = SingletonCategories.getInstance();
             ArrayList<Sale> sales = sc.getSales();
-            sale.setStatus("canceled");
+            sale.setStatus(SaleStatus.CANCELLED);
             sc.setSales(sales);
             //Client.ClearCart(sale.getClient());
             return new ResponseEntity<>(sale, HttpStatus.OK);
@@ -94,7 +95,7 @@ public class SaleService {
         if(sale !=null){
             SingletonCategories sc = SingletonCategories.getInstance();
             ArrayList<Sale> sales = sc.getSales();
-            sale.setStatus("canceled after confirm");
+            sale.setStatus(SaleStatus.CANCELLED_AFTER_CONFIRM);
             sc.setSales(sales);
             RestoreStock(sale);
             return new ResponseEntity<>(sale, HttpStatus.OK);
