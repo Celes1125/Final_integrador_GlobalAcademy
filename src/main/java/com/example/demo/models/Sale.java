@@ -60,6 +60,17 @@ public class Sale {
                     }
                 });
     }
+    public static void RestoreStock(Sale sale){
+        ArrayList<SaleDetail> cart = sale.getCart();
+        cart.stream().forEach(
+                d -> {
+                    d.getProduct().setStock(d.getProduct().getStock() + d.getQuantity());
+                    SingletonCategories sc = SingletonCategories.getInstance();
+                    ArrayList <Product> products = sc.getProducts();
+                    sc.setProducts(products);
+                }
+                );
+    }
     private void recalculateStock() {
         ArrayList<SaleDetail> cart = client.getClientCart();
         cart.stream().forEach(
@@ -119,11 +130,11 @@ public class Sale {
         this.deliveryDate = deliveryDate;
     }
 
-    public Client getCliente() {
+    public Client getClient() {
         return client;
     }
 
-    public void setCliente(Client client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
