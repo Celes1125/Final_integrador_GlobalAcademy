@@ -66,4 +66,21 @@ public class SaleService {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    public ResponseEntity<Sale> cancelOrder(String saleId) {
+        Sale sale;
+        sale = this.getSaleById(saleId).getBody();
+
+        if(sale !=null){
+            SingletonCategories sc = SingletonCategories.getInstance();
+            ArrayList<Sale> sales = sc.getSales();
+            sale.setStatus("canceled");
+            sc.setSales(sales);
+            //Client.ClearCart(sale.getClient());
+            return new ResponseEntity<>(sale, HttpStatus.OK);
+            //trabar el confirmSale de alguna manera para esta saleId
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

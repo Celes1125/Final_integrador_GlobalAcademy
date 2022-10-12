@@ -119,11 +119,11 @@ public class Sale {
         this.deliveryDate = deliveryDate;
     }
 
-    public Client getCliente() {
+    public Client getClient() {
         return client;
     }
 
-    public void setCliente(Client client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 

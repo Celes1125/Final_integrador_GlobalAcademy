@@ -61,6 +61,17 @@ public class SaleController {
         return saleService.getSaleById(id);
     }
 
+    @PutMapping (
+            value = "/sales/cancel",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<Sale> cancelOrder(
+            @RequestHeader (value= "saleId") String saleId
+    ){
+        return saleService.cancelOrder(saleId);
+    }
+
 
     //crud...vender, cancelar, despachar????
     //ver ventas por fecha

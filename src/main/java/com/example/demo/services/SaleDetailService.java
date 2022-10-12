@@ -53,7 +53,7 @@ public class SaleDetailService {
 
     public static ResponseEntity<ArrayList<SaleDetail>> clearCart(String password, String email) {
         Client client = Client.CheckClient(password, email);
-        client.cleanCart(client);
+        client.ClearCart(client);
         return new ResponseEntity<>(client.getClientCart(), HttpStatus.OK);
     }
 }
