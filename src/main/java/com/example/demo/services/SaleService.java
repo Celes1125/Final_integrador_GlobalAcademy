@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.example.demo.models.Sale.RestoreStock;
+
 
 @Service
 public class SaleService {
@@ -79,8 +81,27 @@ public class SaleService {
             //Client.ClearCart(sale.getClient());
             return new ResponseEntity<>(sale, HttpStatus.OK);
             //trabar el confirmSale de alguna manera para esta saleId
+            //trabar la edición de alguna manera...??
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    public ResponseEntity<Sale> cancelSale(String saleId) {
+        Sale sale;
+        sale = this.getSaleById(saleId).getBody();
+
+        if(sale !=null){
+            SingletonCategories sc = SingletonCategories.getInstance();
+            ArrayList<Sale> sales = sc.getSales();
+            sale.setStatus("canceled after confirm");
+            sc.setSales(sales);
+            RestoreStock(sale);
+            return new ResponseEntity<>(sale, HttpStatus.OK);
+            //trabar la edición de alguna manera...??
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

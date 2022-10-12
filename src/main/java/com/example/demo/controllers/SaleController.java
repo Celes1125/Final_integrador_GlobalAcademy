@@ -62,7 +62,7 @@ public class SaleController {
     }
 
     @PutMapping (
-            value = "/sales/cancel",
+            value = "/sales/cancel_order",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
@@ -70,6 +70,17 @@ public class SaleController {
             @RequestHeader (value= "saleId") String saleId
     ){
         return saleService.cancelOrder(saleId);
+    }
+
+    @PutMapping (
+            value = "/sales/cancel_sale",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<Sale> cancelSale(
+            @RequestHeader (value= "saleId") String saleId
+    ){
+        return saleService.cancelSale(saleId);
     }
 
 
