@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import com.example.demo.SingletonCategories;
+import com.example.demo.utils.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -10,7 +11,7 @@ public class Product {
     private String productId;
     private String name;
     private Double price;
-    private String category;
+    private ProductCategory category;
     private Seller seller;
     private int stock;
 
@@ -18,7 +19,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, Double price, String category, Seller seller, int stock) {
+    public Product(String name, Double price, ProductCategory category, Seller seller, int stock) {
         this.productId = UUID.randomUUID().toString();
         this.name = name;
         this.price = price;
@@ -51,11 +52,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 

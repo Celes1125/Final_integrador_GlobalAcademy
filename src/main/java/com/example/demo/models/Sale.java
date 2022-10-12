@@ -1,6 +1,7 @@
 package com.example.demo.models;
 import com.example.demo.SingletonCategories;
 import com.example.demo.services.SaleDetailService;
+import com.example.demo.utils.SaleStatus;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,14 +16,14 @@ public class Sale {
     private Client client;
     private ArrayList<SaleDetail> cart;
     private double totalPrice;
-    private String status;
+    private SaleStatus status;
 
 
 
     public Sale(Client client) {
         this.client = client;
         this.saleId = UUID.randomUUID().toString();
-        this.status = "created";
+        this.status = SaleStatus.CREATED;
     }
 
     public void makeOrder(String saleId) {
@@ -35,14 +36,10 @@ public class Sale {
 
     }
 
-    //public void cancellOrder(){   }
-
-    //public void cancellSale(){   }
-
 
     public static void SendToDeliverySystem(Sale sale) {
         SaleDetailService.clearCart(sale.client.getPassword(), sale.client.getEmail());
-        sale.status = "onTheWay";
+        sale.status = SaleStatus.DISPACHTED;
     }
     public static void RefreshStock(Sale sale){
         ArrayList<SaleDetail> cart = sale.client.getClientCart();
@@ -154,11 +151,11 @@ public class Sale {
         this.cart = cart;
     }
 
-    public String getStatus() {
+    public SaleStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(SaleStatus status) {
         this.status = status;
     }
 
